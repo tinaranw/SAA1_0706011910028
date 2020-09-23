@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F4F3EE"
     tools:context=".AddCourse">
 
     <androidx.core.widget.NestedScrollView
@@ -13,7 +14,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/addCourseToolbar"
@@ -29,14 +30,14 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="120dp"
                 android:layout_marginTop="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/addCourseToolbar"
-                tools:srcCompat="@tools:sample/avatars" />
+                app:srcCompat="@drawable/book" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/courseSubjectInput"

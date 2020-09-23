@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F4F3EE"
     tools:context=".AddLecturer">
 
     <androidx.core.widget.NestedScrollView
@@ -13,7 +14,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/addLecturerToolbar"
@@ -36,7 +37,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/addLecturerToolbar"
-                tools:srcCompat="@tools:sample/avatars" />
+                app:srcCompat="@drawable/teacher"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/lecturerNameInput"
@@ -72,7 +73,7 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="@+id/lecturerNameInput"
                 app:layout_constraintStart_toStartOf="@+id/lecturerNameInput"
-                app:layout_constraintTop_toBottomOf="@+id/lecturerGenderTextView" >
+                app:layout_constraintTop_toBottomOf="@+id/lecturerGenderTextView">
 
                 <RadioButton
                     android:id="@+id/lecturerFemaleRadioButton"
