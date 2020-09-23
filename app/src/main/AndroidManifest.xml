@@ -14,13 +14,16 @@
         <activity android:name=".AddLecturer" />
         <activity android:name=".LoginStudent" />
         <activity android:name=".StudentRegister" />
-        <activity android:name=".SplashScreen" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity android:name=".MainActivity">
+
         </activity>
     </application>
 

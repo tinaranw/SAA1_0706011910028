@@ -6,13 +6,71 @@
     android:layout_height="match_parent"
     tools:context=".Starter">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="279dp"
-        android:layout_height="343dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/starterToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/books" />
+        app:title="@string/starterToolbarTitle" />
+
+    <ImageButton
+        android:id="@+id/addCourseStarterBtn"
+        android:layout_width="144dp"
+        android:layout_height="204dp"
+        android:layout_marginTop="32dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:padding="40dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="@+id/addStudentStarterBtn"
+        app:layout_constraintStart_toStartOf="@+id/addStudentStarterBtn"
+        app:layout_constraintTop_toBottomOf="@+id/addStudentStarterBtn"
+        app:srcCompat="@drawable/blankbook" />
+
+    <ImageButton
+        android:id="@+id/addLecturerStarterBtn"
+        android:layout_width="144dp"
+        android:layout_height="204dp"
+        android:layout_marginTop="32dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:padding="40dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="@+id/loginStudentStarterBtn"
+        app:layout_constraintStart_toStartOf="@+id/loginStudentStarterBtn"
+        app:layout_constraintTop_toBottomOf="@+id/loginStudentStarterBtn"
+        app:srcCompat="@drawable/teacher" />
+
+    <ImageButton
+        android:id="@+id/loginStudentStarterBtn"
+        android:layout_width="144dp"
+        android:layout_height="204dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:padding="40dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/addStudentStarterBtn"
+        app:layout_constraintTop_toTopOf="@+id/addStudentStarterBtn"
+        app:srcCompat="@drawable/student" />
+
+    <ImageButton
+        android:id="@+id/addStudentStarterBtn"
+        android:layout_width="144dp"
+        android:layout_height="204dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="68dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:padding="40dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/starterToolbar"
+        app:srcCompat="@drawable/student" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

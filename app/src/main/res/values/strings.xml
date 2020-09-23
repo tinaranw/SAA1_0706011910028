@@ -29,6 +29,8 @@
     <string name="courseLecturerText">Lecturer</string>
     <string name="addCourseBtnText">Add Course</string>
     <string name="mainToolbarTitle">Homepage</string>
+    <string name="starterToolbarTitle">Starter</string>
+    <string name="companionText">Your All-Time Companion</string>
 
     <string-array name="days">
         <item>Monday</item>

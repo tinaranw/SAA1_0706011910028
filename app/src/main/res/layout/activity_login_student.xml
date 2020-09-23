@@ -63,7 +63,7 @@
                 android:id="@+id/studentPasswordLoginInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="@+id/studentEmailLoginInput"
                 app:layout_constraintStart_toStartOf="@+id/studentEmailLoginInput"
                 app:layout_constraintTop_toBottomOf="@+id/studentEmailLoginInput">
@@ -80,6 +80,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:background="@drawable/button_selector"
                 android:text="@string/studentLoginBtnText"
                 app:layout_constraintEnd_toEndOf="@+id/studentPasswordLoginInput"
                 app:layout_constraintStart_toStartOf="@+id/studentPasswordLoginInput"

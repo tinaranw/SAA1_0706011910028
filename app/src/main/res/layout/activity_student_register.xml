@@ -64,7 +64,7 @@
                 android:id="@+id/studentPasswordRegisterInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="@+id/studentEmailRegisterInput"
                 app:layout_constraintStart_toStartOf="@+id/studentEmailRegisterInput"
                 app:layout_constraintTop_toBottomOf="@+id/studentEmailRegisterInput">
@@ -80,7 +80,7 @@
                 android:id="@+id/studentFullNameRegisterInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="@+id/studentPasswordRegisterInput"
                 app:layout_constraintStart_toStartOf="@+id/studentPasswordRegisterInput"
                 app:layout_constraintTop_toBottomOf="@+id/studentPasswordRegisterInput">
@@ -95,7 +95,7 @@
                 android:id="@+id/studentNIMRegisterInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="@+id/studentFullNameRegisterInput"
                 app:layout_constraintStart_toStartOf="@+id/studentFullNameRegisterInput"
                 app:layout_constraintTop_toBottomOf="@+id/studentFullNameRegisterInput">
@@ -111,7 +111,7 @@
                 android:id="@+id/studentAgeRegisterInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="@+id/studentGenderRegisterRadioGroup"
                 app:layout_constraintStart_toStartOf="@+id/studentGenderRegisterRadioGroup"
                 app:layout_constraintTop_toBottomOf="@+id/studentGenderRegisterRadioGroup">
@@ -127,7 +127,7 @@
                 android:id="@+id/studentAddressRegisterInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="@+id/studentAgeRegisterInput"
                 app:layout_constraintStart_toStartOf="@+id/studentAgeRegisterInput"
                 app:layout_constraintTop_toBottomOf="@+id/studentAgeRegisterInput">
@@ -143,7 +143,7 @@
                 android:id="@+id/studentGenderTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/studentGenderText"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/studentNIMRegisterInput"
@@ -153,7 +153,7 @@
                 android:id="@+id/studentGenderRegisterRadioGroup"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="@+id/studentNIMRegisterInput"
                 app:layout_constraintStart_toStartOf="@+id/studentNIMRegisterInput"
                 app:layout_constraintTop_toBottomOf="@+id/studentGenderTextView">
@@ -179,6 +179,8 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="32dp"
                 android:layout_weight="1"
+                android:background="@drawable/button_selector"
+                android:hapticFeedbackEnabled="true"
                 android:text="@string/studentRegisterBtn"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/studentAddressRegisterInput"
