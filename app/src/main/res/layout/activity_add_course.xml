@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddCourse">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/addCourseToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:title="@string/addCourseTitle" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addCourseToolbar"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/courseSubjectInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/courseSubjectHint" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/courseDaySpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/courseSubjectInput"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/courseSubjectInput"
+                app:layout_constraintTop_toBottomOf="@+id/courseDayTextView" />
+
+            <TextView
+                android:id="@+id/courseDayTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/courseDayText"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/courseSubjectInput"
+                app:layout_constraintTop_toBottomOf="@+id/courseSubjectInput" />
+
+            <TextView
+                android:id="@+id/courseTimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/courseTimeText"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/courseDaySpinner"
+                app:layout_constraintTop_toBottomOf="@+id/courseDaySpinner" />
+
+            <Spinner
+                android:id="@+id/courseTimeSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/courseDaySpinner"
+                app:layout_constraintStart_toStartOf="@+id/courseTimeTextView"
+                app:layout_constraintTop_toBottomOf="@+id/courseTimeTextView" />
+
+            <TextView
+                android:id="@+id/courseLecturerTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/courseLecturerText"
+                app:layout_constraintStart_toStartOf="@+id/courseTimeSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/courseTimeSpinner" />
+
+            <Spinner
+                android:id="@+id/courseLecturerSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/courseTimeSpinner"
+                app:layout_constraintStart_toStartOf="@+id/courseLecturerTextView"
+                app:layout_constraintTop_toBottomOf="@+id/courseLecturerTextView" />
+
+            <Button
+                android:id="@+id/addCourseBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/addCourseBtnText"
+                app:layout_constraintEnd_toEndOf="@+id/courseLecturerSpinner"
+                app:layout_constraintStart_toStartOf="@+id/courseLecturerSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/courseLecturerSpinner" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

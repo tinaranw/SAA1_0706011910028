@@ -1,0 +1,68 @@
+<resources>
+    <string name="app_name">SAA1_0706011910028</string>
+    <string name="studentGenderText">Gender</string>
+    <string name="studentEmailHint">Email</string>
+    <string name="studentPasswordHint">Password</string>
+    <string name="studentFullNameHint">Full Name</string>
+    <string name="studentNIMHint">NIM</string>
+    <string name="studentAgeHint">Age</string>
+    <string name="studentAddressHint">Address</string>
+    <string name="studentRegisterTitle">Register as Student</string>
+    <string name="studentEmailLoginHint">Email</string>
+    <string name="studentPasswordLoginHint">Password</string>
+    <string name="lecturerGenderText">Gender</string>
+    <string name="lecturerNameHint">Name</string>
+    <string name="lecturerExpertiseHint">Expertise</string>
+    <string name="studentLoginTitle">Login as Student</string>
+    <string name="addLecturerTitle">Add Lecturer</string>
+    <string name="lecturerFemaleRadioButtonText">Female</string>
+    <string name="lecturerMaleRadioButtonText">Male</string>
+    <string name="studentFemaleRadioButtonText">Female</string>
+    <string name="studentMaleRadioButtonText">Male</string>
+    <string name="studentRegisterBtn">Register</string>
+    <string name="addLecturerBtnText">Add Lecturer</string>
+    <string name="studentLoginBtnText">Login</string>
+    <string name="addCourseTitle">Add Course</string>
+    <string name="courseSubjectHint">Course Subject</string>
+    <string name="courseDayText">Day</string>
+    <string name="courseTimeText">Time</string>
+    <string name="courseLecturerText">Lecturer</string>
+    <string name="addCourseBtnText">Add Course</string>
+    <string name="mainToolbarTitle">Homepage</string>
+
+    <string-array name="days">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+
+    <string-array name="lecturer">
+    </string-array>
+
+    <string-array name="time">
+        <item>07:30:00</item>
+        <item>08:00:00</item>
+        <item>08:30:00</item>
+        <item>09:00:00</item>
+        <item>09:30:00</item>
+        <item>10:00:00</item>
+        <item>10:30:00</item>
+        <item>11:00:00</item>
+        <item>11:30:00</item>
+        <item>12:00:00</item>
+        <item>12:30:00</item>
+        <item>13:00:00</item>
+        <item>13:30:00</item>
+        <item>14:00:00</item>
+        <item>14:30:00</item>
+        <item>15:00:00</item>
+        <item>15:30:00</item>
+        <item>16:00:00</item>
+        <item>16:30:00</item>
+        <item>17:00:00</item>
+    </string-array>
+</resources>
