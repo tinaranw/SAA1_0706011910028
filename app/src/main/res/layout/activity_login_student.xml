@@ -29,6 +29,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
                 app:title="@string/studentLoginTitle" />
 
             <ImageView
@@ -81,6 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:background="@drawable/button_selector"
+                android:enabled="false"
                 android:text="@string/studentLoginBtnText"
                 app:layout_constraintEnd_toEndOf="@+id/studentPasswordLoginInput"
                 app:layout_constraintStart_toStartOf="@+id/studentPasswordLoginInput"

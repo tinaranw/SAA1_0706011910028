@@ -30,6 +30,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
                 app:title="@string/studentRegisterTitle" />
 
             <ImageView
@@ -73,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/studentPasswordHint"
-                    android:inputType="textPassword|numberPassword" />
+                    android:inputType="textPassword|numberPassword|textWebPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -180,6 +181,7 @@
                 android:layout_marginBottom="32dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_selector"
+                android:enabled="false"
                 android:hapticFeedbackEnabled="true"
                 android:text="@string/studentRegisterBtn"
                 app:layout_constraintBottom_toBottomOf="parent"

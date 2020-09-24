@@ -26,6 +26,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
                 app:title="@string/addCourseTitle" />
 
             <ImageView
@@ -87,13 +88,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/courseDaySpinner" />
 
             <Spinner
-                android:id="@+id/courseTimeSpinner"
-                android:layout_width="0dp"
+                android:id="@+id/courseTimeStartSpinner"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/courseDaySpinner"
                 app:layout_constraintStart_toStartOf="@+id/courseTimeTextView"
-                app:layout_constraintTop_toBottomOf="@+id/courseTimeTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/timeStartTextView" />
 
             <TextView
                 android:id="@+id/courseLecturerTextView"
@@ -101,15 +101,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/courseLecturerText"
-                app:layout_constraintStart_toStartOf="@+id/courseTimeSpinner"
-                app:layout_constraintTop_toBottomOf="@+id/courseTimeSpinner" />
+                app:layout_constraintStart_toStartOf="@+id/courseTimeStartSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/courseTimeStartSpinner" />
 
             <Spinner
                 android:id="@+id/courseLecturerSpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/courseTimeSpinner"
+                app:layout_constraintEnd_toEndOf="@+id/courseDaySpinner"
                 app:layout_constraintStart_toStartOf="@+id/courseLecturerTextView"
                 app:layout_constraintTop_toBottomOf="@+id/courseLecturerTextView" />
 
@@ -119,10 +119,38 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/button_selector"
+                android:enabled="false"
                 android:text="@string/addCourseBtnText"
                 app:layout_constraintEnd_toEndOf="@+id/courseLecturerSpinner"
                 app:layout_constraintStart_toStartOf="@+id/courseLecturerSpinner"
                 app:layout_constraintTop_toBottomOf="@+id/courseLecturerSpinner" />
+
+            <TextView
+                android:id="@+id/timeStartTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Start"
+                app:layout_constraintStart_toStartOf="@+id/courseTimeTextView"
+                app:layout_constraintTop_toBottomOf="@+id/courseTimeTextView" />
+
+            <TextView
+                android:id="@+id/timeStartEndView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="64dp"
+                android:text="End"
+                app:layout_constraintBottom_toBottomOf="@+id/timeStartTextView"
+                app:layout_constraintStart_toEndOf="@+id/courseTimeStartSpinner"
+                app:layout_constraintTop_toTopOf="@+id/timeStartTextView" />
+
+            <Spinner
+                android:id="@+id/courseTimeEndSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/courseTimeStartSpinner"
+                app:layout_constraintStart_toStartOf="@+id/timeStartEndView"
+                app:layout_constraintTop_toTopOf="@+id/courseTimeStartSpinner" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

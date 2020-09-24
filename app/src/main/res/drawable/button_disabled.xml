@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@android:color/darker_gray"/>
-    <corners android:radius="8dp"/>
-</selector>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@android:color/white">
+    <item
+        android:id="@android:id/background"
+        android:gravity="center">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <solid android:color="#c9c6c1"/>
+            <corners android:radius="8dp"/>
+        </shape>
+    </item>
+</ripple>
+
