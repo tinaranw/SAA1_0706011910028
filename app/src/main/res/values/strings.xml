@@ -31,6 +31,9 @@
     <string name="mainToolbarTitle">Homepage</string>
     <string name="starterToolbarTitle">Starter</string>
     <string name="companionText">Your All-Time Companion</string>
+    <string name="lecturerDataTitle">Lecturer Data</string>
+    <string name="lecturerList">Lecturer List</string>
+    <string name="expertiseLabel">Expertise:</string>
 
     <string-array name="days">
         <item>Monday</item>

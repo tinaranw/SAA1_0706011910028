@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Starter"></activity>
+        <activity android:name=".adapter.LecturerAdapter"></activity>
+        <activity android:name=".LecturerData" />
+        <activity android:name=".Starter" />
         <activity android:name=".AddCourse" />
         <activity android:name=".AddLecturer" />
         <activity android:name=".LoginStudent" />
@@ -20,11 +22,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

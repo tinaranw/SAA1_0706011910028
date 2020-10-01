@@ -1,9 +1,12 @@
 package com.uc.saa1_0706011910028;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -46,6 +49,7 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
         lecturerExpertise.getEditText().addTextChangedListener(this);
 
         toolbar = findViewById(R.id.addLecturerToolbar);
+        setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +81,7 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
     public void addLecturer(String mnama, String mgender, String mexpertise){
         String mid = mDatabase.child("lecturer").push().getKey();
         Lecturer lecturer = new Lecturer(mid, mnama, mgender, mexpertise);
-        mDatabase.child("lecturer").setValue(lecturer).addOnSuccessListener(new OnSuccessListener<Void>() {
+        mDatabase.child("lecturer").child(mid).setValue(lecturer).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Intent intent = new Intent(AddLecturer.this,Starter.class);
@@ -91,6 +95,24 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
         });
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.lecturerList){
+            Intent intent;
+            intent = new Intent(AddLecturer.this, LecturerData.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(AddLecturer.this);
+            startActivity(intent, options.toBundle());
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -112,5 +134,11 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
     @Override
     public void afterTextChanged(Editable s) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.lecturer_menu, menu);
+        return true;
     }
 }
