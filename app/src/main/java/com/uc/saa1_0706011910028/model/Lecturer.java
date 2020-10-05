@@ -1,6 +1,10 @@
 package com.uc.saa1_0706011910028.model;
 
-public class Lecturer {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Lecturer implements Parcelable {
+
     private String id, name, gender, expertise;
 
     public Lecturer(){}
@@ -12,35 +16,51 @@ public class Lecturer {
         this.expertise = expertise;
     }
 
-    public String getId() {
-        return id;
+    protected Lecturer(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        gender = in.readString();
+        expertise = in.readString();
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public static final Creator<Lecturer> CREATOR = new Creator<Lecturer>() {
+        @Override
+        public Lecturer createFromParcel(Parcel in) {
+            return new Lecturer(in);
+        }
+
+        @Override
+        public Lecturer[] newArray(int size) {
+            return new Lecturer[size];
+        }
+    };
+
+    public String getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getGender() {
         return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
     public String getExpertise() {
         return expertise;
     }
 
-    public void setExpertise(String expertise) {
-        this.expertise = expertise;
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(name);
+        dest.writeString(gender);
+        dest.writeString(expertise);
     }
 }

@@ -1,9 +1,9 @@
 package com.uc.saa1_0706011910028;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -63,11 +63,25 @@ public class LecturerData extends AppCompatActivity {
         });
     }
 
-    public void showLecturerData(ArrayList<Lecturer> list){
+    public void showLecturerData(final ArrayList<Lecturer> list){
         rvLectData.setLayoutManager(new LinearLayoutManager(LecturerData.this));
         LecturerAdapter lecturerAdapter = new LecturerAdapter(LecturerData.this);
         lecturerAdapter.setListLecturer(list);
         rvLectData.setAdapter(lecturerAdapter);
+
+        ItemClickSupport.addTo(rvLectData).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Intent intent = new Intent(LecturerData.this, LecturerDetail.class);
+                Lecturer lecturer = new Lecturer(list.get(position).getId(), list.get(position).getName(), list.get(position).getGender(), list.get(position).getExpertise());
+                intent.putExtra("data_lecturer", lecturer);
+                intent.putExtra("position", position);
+//                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LecturerData.this);
+//                startActivity(intent, options.toBundle());
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -76,9 +90,10 @@ public class LecturerData extends AppCompatActivity {
         if(id == android.R.id.home){
             Intent intent;
             intent = new Intent(LecturerData.this, AddLecturer.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LecturerData.this);
-            startActivity(intent, options.toBundle());
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LecturerData.this);
+//            startActivity(intent, options.toBundle());
+            startActivity(intent);
             finish();
             return true;
         }
@@ -89,9 +104,10 @@ public class LecturerData extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent;
         intent = new Intent(LecturerData.this, AddLecturer.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LecturerData.this);
-        startActivity(intent, options.toBundle());
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LecturerData.this);
+//        startActivity(intent, options.toBundle());
+        startActivity(intent);
         finish();
     }
 

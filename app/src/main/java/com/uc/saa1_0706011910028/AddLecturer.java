@@ -1,6 +1,5 @@
 package com.uc.saa1_0706011910028;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -50,12 +49,12 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
 
         toolbar = findViewById(R.id.addLecturerToolbar);
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
 
         lecturerGender = findViewById(R.id.lecturerGenderRadioGroup);
         lecturerGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -86,6 +85,7 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
             public void onSuccess(Void aVoid) {
                 Intent intent = new Intent(AddLecturer.this,Starter.class);
                 startActivity(intent);
+                finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -99,12 +99,23 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.lecturerList){
+        if(id == android.R.id.home){
+            Intent intent;
+            intent = new Intent(AddLecturer.this, Starter.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(AddLecturer.this);
+//            startActivity(intent, options.toBundle());
+            startActivity(intent);
+            finish();
+            return true;
+//            finish();
+        } else if(id == R.id.lecturerList){
             Intent intent;
             intent = new Intent(AddLecturer.this, LecturerData.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(AddLecturer.this);
-            startActivity(intent, options.toBundle());
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(AddLecturer.this);
+//            startActivity(intent, options.toBundle());
+            startActivity(intent);
             finish();
             return true;
         }

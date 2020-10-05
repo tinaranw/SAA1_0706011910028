@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">SAA1_0706011910028</string>
+    <string name="app_name">UniGuide</string>
+    <string name="loading">loading. . .</string>
     <string name="studentGenderText">Gender</string>
     <string name="studentEmailHint">Email</string>
     <string name="studentPasswordHint">Password</string>
@@ -34,6 +35,10 @@
     <string name="lecturerDataTitle">Lecturer Data</string>
     <string name="lecturerList">Lecturer List</string>
     <string name="expertiseLabel">Expertise:</string>
+    <string name="lecturerDetailTitle">Lecturer Detail</string>
+    <string name="textLecturerExpertise">Expertise</string>
+    <string name="studentList">Student List</string>
+    <string name="studentDataTitle">Student Data</string>
 
     <string-array name="days">
         <item>Monday</item>
@@ -72,8 +77,7 @@
         <item>17:00:00</item>
     </string-array>
 
-    <string-array name="timeEnd">
-        <item>07:30:00</item>
+    <string-array name="timeEnd0730">
         <item>08:00:00</item>
         <item>08:30:00</item>
         <item>09:00:00</item>
@@ -92,6 +96,213 @@
         <item>15:30:00</item>
         <item>16:00:00</item>
         <item>16:30:00</item>
+        <item>17:00:00</item>
+    </string-array>
+    <string-array name="timeEnd0800">
+        <item>08:30:00</item>
+        <item>09:00:00</item>
+        <item>09:30:00</item>
+        <item>10:00:00</item>
+        <item>10:30:00</item>
+        <item>11:00:00</item>
+        <item>11:30:00</item>
+        <item>12:00:00</item>
+        <item>12:30:00</item>
+        <item>13:00:00</item>
+        <item>13:30:00</item>
+        <item>14:00:00</item>
+        <item>14:30:00</item>
+        <item>15:00:00</item>
+        <item>15:30:00</item>
+        <item>16:00:00</item>
+        <item>16:30:00</item>
+        <item>17:00:00</item>
+    </string-array>
+    <string-array name="timeEnd0830">
+        <item>09:00:00</item>
+        <item>09:30:00</item>
+        <item>10:00:00</item>
+        <item>10:30:00</item>
+        <item>11:00:00</item>
+        <item>11:30:00</item>
+        <item>12:00:00</item>
+        <item>12:30:00</item>
+        <item>13:00:00</item>
+        <item>13:30:00</item>
+        <item>14:00:00</item>
+        <item>14:30:00</item>
+        <item>15:00:00</item>
+        <item>15:30:00</item>
+        <item>16:00:00</item>
+        <item>16:30:00</item>
+        <item>17:00:00</item>
+    </string-array>
+    <string-array name="timeEnd0900">
+        <item>09:30:00</item>
+        <item>10:00:00</item>
+        <item>10:30:00</item>
+        <item>11:00:00</item>
+        <item>11:30:00</item>
+        <item>12:00:00</item>
+        <item>12:30:00</item>
+        <item>13:00:00</item>
+        <item>13:30:00</item>
+        <item>14:00:00</item>
+        <item>14:30:00</item>
+        <item>15:00:00</item>
+        <item>15:30:00</item>
+        <item>16:00:00</item>
+        <item>16:30:00</item>
+        <item>17:00:00</item>
+    </string-array>
+    <string-array name="timeEnd0930">
+        <item>10:00:00</item>
+        <item>10:30:00</item>
+        <item>11:00:00</item>
+        <item>11:30:00</item>
+        <item>12:00:00</item>
+        <item>12:30:00</item>
+        <item>13:00:00</item>
+        <item>13:30:00</item>
+        <item>14:00:00</item>
+        <item>14:30:00</item>
+        <item>15:00:00</item>
+        <item>15:30:00</item>
+        <item>16:00:00</item>
+        <item>16:30:00</item>
+        <item>17:00:00</item>
+    </string-array>
+    <string-array name="timeEnd1000">
+        <item>10:30:00</item>
+        <item>11:00:00</item>
+        <item>11:30:00</item>
+        <item>12:00:00</item>
+        <item>12:30:00</item>
+        <item>13:00:00</item>
+        <item>13:30:00</item>
+        <item>14:00:00</item>
+        <item>14:30:00</item>
+        <item>15:00:00</item>
+        <item>15:30:00</item>
+        <item>16:00:00</item>
+        <item>16:30:00</item>
+        <item>17:00:00</item>
+    </string-array>
+    <string-array name="timeEnd1030">
+        <item>11:00:00</item>
+        <item>11:30:00</item>
+        <item>12:00:00</item>
+        <item>12:30:00</item>
+        <item>13:00:00</item>
+        <item>13:30:00</item>
+        <item>14:00:00</item>
+        <item>14:30:00</item>
+        <item>15:00:00</item>
+        <item>15:30:00</item>
+        <item>16:00:00</item>
+        <item>16:30:00</item>
+        <item>17:00:00</item>
+    </string-array>
+    <string-array name="timeEnd1100">
+        <item>11:30:00</item>
+        <item>12:00:00</item>
+        <item>12:30:00</item>
+        <item>13:00:00</item>
+        <item>13:30:00</item>
+        <item>14:00:00</item>
+        <item>14:30:00</item>
+        <item>15:00:00</item>
+        <item>15:30:00</item>
+        <item>16:00:00</item>
+        <item>16:30:00</item>
+        <item>17:00:00</item>
+    </string-array>
+    <string-array name="timeEnd1130">
+        <item>12:00:00</item>
+        <item>12:30:00</item>
+        <item>13:00:00</item>
+        <item>13:30:00</item>
+        <item>14:00:00</item>
+        <item>14:30:00</item>
+        <item>15:00:00</item>
+        <item>15:30:00</item>
+        <item>16:00:00</item>
+        <item>16:30:00</item>
+        <item>17:00:00</item>
+    </string-array>
+    <string-array name="timeEnd1200">
+        <item>12:30:00</item>
+        <item>13:00:00</item>
+        <item>13:30:00</item>
+        <item>14:00:00</item>
+        <item>14:30:00</item>
+        <item>15:00:00</item>
+        <item>15:30:00</item>
+        <item>16:00:00</item>
+        <item>16:30:00</item>
+        <item>17:00:00</item>
+    </string-array>
+    <string-array name="timeEnd1230">
+        <item>13:00:00</item>
+        <item>13:30:00</item>
+        <item>14:00:00</item>
+        <item>14:30:00</item>
+        <item>15:00:00</item>
+        <item>15:30:00</item>
+        <item>16:00:00</item>
+        <item>16:30:00</item>
+        <item>17:00:00</item>
+    </string-array>
+    <string-array name="timeEnd1300">
+        <item>13:30:00</item>
+        <item>14:00:00</item>
+        <item>14:30:00</item>
+        <item>15:00:00</item>
+        <item>15:30:00</item>
+        <item>16:00:00</item>
+        <item>16:30:00</item>
+        <item>17:00:00</item>
+    </string-array>
+    <string-array name="timeEnd1330">
+        <item>14:00:00</item>
+        <item>14:30:00</item>
+        <item>15:00:00</item>
+        <item>15:30:00</item>
+        <item>16:00:00</item>
+        <item>16:30:00</item>
+        <item>17:00:00</item>
+    </string-array>
+    <string-array name="timeEnd1400">
+        <item>14:30:00</item>
+        <item>15:00:00</item>
+        <item>15:30:00</item>
+        <item>16:00:00</item>
+        <item>16:30:00</item>
+        <item>17:00:00</item>
+    </string-array>
+    <string-array name="timeEnd1430">
+        <item>15:00:00</item>
+        <item>15:30:00</item>
+        <item>16:00:00</item>
+        <item>16:30:00</item>
+        <item>17:00:00</item>
+    </string-array>
+    <string-array name="timeEnd1500">
+        <item>15:30:00</item>
+        <item>16:00:00</item>
+        <item>16:30:00</item>
+        <item>17:00:00</item>
+    </string-array>
+    <string-array name="timeEnd1530">
+        <item>16:00:00</item>
+        <item>16:30:00</item>
+        <item>17:00:00</item>
+    </string-array>
+    <string-array name="timeEnd1600">
+        <item>16:30:00</item>
+        <item>17:00:00</item>
+    </string-array>
+    <string-array name="timeEnd1630">
         <item>17:00:00</item>
     </string-array>
 </resources>

@@ -1,12 +1,11 @@
 package com.uc.saa1_0706011910028;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Starter extends AppCompatActivity {
 
@@ -26,7 +25,12 @@ public class Starter extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Starter.this, AddLecturer.class);
+                intent.putExtra("action", "add");
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Starter.this);
+//                startActivity(intent, options.toBundle());
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -34,7 +38,12 @@ public class Starter extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Starter.this, AddCourse.class);
+                intent.putExtra("action", "add");
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Starter.this);
+//                startActivity(intent, options.toBundle());
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -42,7 +51,11 @@ public class Starter extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Starter.this, LoginStudent.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Starter.this);
+//                startActivity(intent, options.toBundle());
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -50,7 +63,12 @@ public class Starter extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Starter.this, StudentRegister.class);
+                intent.putExtra("action", "add");
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(Starter.this);
+//                startActivity(intent, options.toBundle());
                 startActivity(intent);
+                finish();
             }
         });
     }

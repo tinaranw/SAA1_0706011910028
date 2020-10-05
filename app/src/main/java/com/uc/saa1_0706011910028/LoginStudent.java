@@ -1,9 +1,10 @@
 package com.uc.saa1_0706011910028;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
+import android.view.MenuItem;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,13 +33,32 @@ public class LoginStudent extends AppCompatActivity implements TextWatcher {
         login = findViewById(R.id.studentLoginBtn);
 
         toolbar = findViewById(R.id.studentLoginToolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == android.R.id.home){
+            Intent intent;
+            intent = new Intent(LoginStudent.this, Starter.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LoginStudent.this);
+//            startActivity(intent, options.toBundle());
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -61,5 +81,15 @@ public class LoginStudent extends AppCompatActivity implements TextWatcher {
     @Override
     public void afterTextChanged(Editable s) {
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent;
+        intent = new Intent(LoginStudent.this, Starter.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LoginStudent.this);
+//        startActivity(intent, options.toBundle());
+        startActivity(intent);
+        finish();
     }
 }

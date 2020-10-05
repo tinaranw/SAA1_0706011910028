@@ -30,6 +30,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:menu="@menu/student_menu"
                 app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
                 app:title="@string/studentRegisterTitle" />
 
@@ -68,13 +69,14 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="@+id/studentEmailRegisterInput"
                 app:layout_constraintStart_toStartOf="@+id/studentEmailRegisterInput"
-                app:layout_constraintTop_toBottomOf="@+id/studentEmailRegisterInput">
+                app:layout_constraintTop_toBottomOf="@+id/studentEmailRegisterInput"
+                app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/studentPasswordHint"
-                    android:inputType="textPassword|numberPassword|textWebPassword" />
+                    android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
