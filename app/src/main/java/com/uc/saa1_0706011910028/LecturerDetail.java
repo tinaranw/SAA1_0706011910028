@@ -110,9 +110,7 @@ public class LecturerDetail extends AppCompatActivity {
                 Intent in = new Intent(LecturerDetail.this, AddLecturer.class);
                 in.putExtra("action", "edit");
                 in.putExtra("edit_data_lect", lecturer);
-//                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LecturerDetail.this);
-//                startActivity(in, options.toBundle());
+                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(in);
                 finish();
             }
@@ -125,9 +123,7 @@ public class LecturerDetail extends AppCompatActivity {
         if(id == android.R.id.home){
             Intent intent;
             intent = new Intent(LecturerDetail.this, LecturerData.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LecturerDetail.this);
-//            startActivity(intent, options.toBundle());
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
             return true;
@@ -139,9 +135,7 @@ public class LecturerDetail extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent;
         intent = new Intent(LecturerDetail.this, LecturerData.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LecturerDetail.this);
-//        startActivity(intent, options.toBundle());
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
     }

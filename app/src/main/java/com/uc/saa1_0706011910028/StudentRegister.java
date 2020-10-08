@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +29,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.uc.saa1_0706011910028.model.Student;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class StudentRegister extends AppCompatActivity implements TextWatcher {
 
@@ -103,6 +105,7 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
     TextInputLayout input_email, input_pass, input_name, input_nim, input_age, input_address;
     RadioGroup rg_gender;
     RadioButton radioButton;
+    RadioButton input_male, input_female;
     Button btn_register;
     String uid="", email="", pass="", name="", nim="", age="", gender="male",address="", action="";
     Student student;
@@ -120,13 +123,6 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-//         bar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
-
         dialog = Glovar.loadingDialog(StudentRegister.this);
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
@@ -139,6 +135,11 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
         input_age = findViewById(R.id.studentAgeRegisterInput);
         input_address = findViewById(R.id.studentAddressRegisterInput);
 
+        input_male = findViewById(R.id.studentMaleRadioButton);
+        input_female = findViewById(R.id.studentFemaleRadioButton);
+
+
+
         input_email.getEditText().addTextChangedListener(this);
         input_pass.getEditText().addTextChangedListener(this);
         input_name.getEditText().addTextChangedListener(this);
@@ -148,22 +149,20 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
 
         btn_register = findViewById(R.id.studentRegisterBtn);
         rg_gender = findViewById(R.id.studentGenderRegisterRadioGroup);
-        rg_gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                radioButton = findViewById(i);
-                gender = radioButton.getText().toString();
-            }
-        });
-
 
 
         Intent intent = getIntent();
         action = intent.getStringExtra("action");
-        Log.d("actionname", action);
         if(action.equalsIgnoreCase("add")){
             getSupportActionBar().setTitle("Register as Student");
             btn_register.setText("Register");
+            rg_gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                    radioButton = findViewById(i);
+                    gender = radioButton.getText().toString();
+                }
+            });
             btn_register.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -172,7 +171,57 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
                 }
             });
         } else if (action.equalsIgnoreCase("edit")){
-
+            getSupportActionBar().setTitle(R.string.editStudent);
+            student = intent.getParcelableExtra("edit_data_student");
+            input_email.getEditText().setFocusable(false);
+            input_pass.getEditText().setFocusable(false);
+            input_email.getEditText().setText(student.getEmail());
+            input_pass.getEditText().setText(student.getPassword());
+            input_name.getEditText().setText(student.getName());
+            input_nim.getEditText().setText(student.getNim());
+            input_age.getEditText().setText(student.getAge());
+            input_address.getEditText().setText(student.getAddress());
+            if(student.getGender().equalsIgnoreCase("male")){
+//                rg_gender.check(R.id.lecturerMaleRadioButton);
+                input_male.setChecked(true);
+            }else{
+//                rg_gender.check(R.id.lecturerFemaleRadioButton);
+                input_female.setChecked(true);
+            }
+            rg_gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                    radioButton = findViewById(i);
+                    gender = radioButton.getText().toString();
+                }
+            });
+            btn_register.setText(R.string.editStudent);
+            btn_register.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.show();
+                    getFormValue();
+                    Map<String,Object> params = new HashMap<>();
+                    params.put("email", email);
+                    params.put("password", pass);
+                    params.put("name", name);
+                    params.put("nim", nim);
+                    params.put("age", age);
+                    params.put("gender", gender);
+                    params.put("address", address);
+                    mDatabase.child(student.getUid()).updateChildren(params).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            dialog.cancel();
+                            Intent intent;
+                            intent = new Intent(StudentRegister.this, StudentData.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+                }
+            });
         }
     }
 
@@ -220,8 +269,6 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
             Intent intent;
             intent = new Intent(StudentRegister.this, Starter.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(StudentRegister.this);
-//            startActivity(intent, options.toBundle());
             startActivity(intent);
             finish();
             return true;
@@ -229,8 +276,6 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
             Intent intent;
             intent = new Intent(StudentRegister.this, StudentData.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(AddLecturer.this);
-//            startActivity(intent, options.toBundle());
             startActivity(intent);
             finish();
             return true;
@@ -243,8 +288,6 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
         Intent intent;
         intent = new Intent(StudentRegister.this, Starter.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(StudentRegister.this);
-//        startActivity(intent, options.toBundle());
         startActivity(intent);
         finish();
     }

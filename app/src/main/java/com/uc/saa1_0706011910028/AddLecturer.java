@@ -1,5 +1,6 @@
 package com.uc.saa1_0706011910028;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -22,15 +23,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.uc.saa1_0706011910028.model.Lecturer;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class AddLecturer extends AppCompatActivity implements TextWatcher {
 
     TextInputLayout lecturerName, lecturerExpertise;
-    String name, expertise;
+    String name="", expertise="", gender="male", action="";
     Button addLecturer;
     Toolbar toolbar;
     RadioGroup lecturerGender;
     RadioButton radioButtonGender;
-    String gender;
+    Dialog dialog;
+    Lecturer lecturer;
 
     private DatabaseReference mDatabase;
 
@@ -46,15 +51,10 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
 
         lecturerName.getEditText().addTextChangedListener(this);
         lecturerExpertise.getEditText().addTextChangedListener(this);
-
+        dialog = Glovar.loadingDialog(AddLecturer.this);
         toolbar = findViewById(R.id.addLecturerToolbar);
         setSupportActionBar(toolbar);
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
+        addLecturer = findViewById(R.id.addLecturerBtn);
 
         lecturerGender = findViewById(R.id.lecturerGenderRadioGroup);
         lecturerGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -65,15 +65,56 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
             }
         });
 
-        addLecturer = findViewById(R.id.addLecturerBtn);
-        addLecturer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                name = lecturerName.getEditText().getText().toString().trim();
-                expertise = lecturerExpertise.getEditText().getText().toString().trim();
-                addLecturer(name, gender, expertise);
+        Intent intent = getIntent();
+        action = intent.getStringExtra("action");
+        if(action.equals("add")){
+            getSupportActionBar().setTitle(R.string.addlecturer);
+            addLecturer.setText(R.string.addlecturer);
+            addLecturer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    name = lecturerName.getEditText().getText().toString().trim();
+                    expertise = lecturerExpertise.getEditText().getText().toString().trim();
+                    addLecturer(name, gender, expertise);
+                }
+            });
+        }else{
+            getSupportActionBar().setTitle(R.string.editlecturer);
+            getSupportActionBar().setTitle(R.string.editlecturer);
+            lecturer = intent.getParcelableExtra("edit_data_lect");
+            lecturerName.getEditText().setText(lecturer.getName());
+            lecturerExpertise.getEditText().setText(lecturer.getExpertise());
+            if(lecturer.getGender().equalsIgnoreCase("male")){
+                lecturerGender.check(R.id.lecturerMaleRadioButton);
+            }else{
+                lecturerGender.check(R.id.lecturerFemaleRadioButton);
             }
-        });
+            addLecturer.setText(R.string.editlecturer);
+            addLecturer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.show();
+                    name = lecturerName.getEditText().getText().toString().trim();
+                    expertise = lecturerExpertise.getEditText().getText().toString().trim();
+                    Map<String,Object> params = new HashMap<>();
+                    params.put("name", name);
+                    params.put("expertise", expertise);
+                    params.put("gender", gender);
+                    mDatabase.child("lecturer").child(lecturer.getId()).updateChildren(params).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            dialog.cancel();
+                            Intent intent;
+                            intent = new Intent(AddLecturer.this, LecturerData.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(AddLecturer.this);
+                            startActivity(intent);
+                            finish();
+                        }
+                    });
+                }
+            });
+        }
 
     }
 
@@ -121,9 +162,6 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {

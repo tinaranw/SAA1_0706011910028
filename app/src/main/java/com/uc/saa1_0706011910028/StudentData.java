@@ -89,9 +89,7 @@ public class StudentData extends AppCompatActivity {
             Intent intent;
             intent = new Intent(StudentData.this, StudentRegister.class);
             intent.putExtra("action", "add");
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(StudentData.this);
-//            startActivity(intent, options.toBundle());
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
             return true;

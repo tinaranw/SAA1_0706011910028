@@ -76,8 +76,6 @@ public class LecturerData extends AppCompatActivity {
                 Lecturer lecturer = new Lecturer(list.get(position).getId(), list.get(position).getName(), list.get(position).getGender(), list.get(position).getExpertise());
                 intent.putExtra("data_lecturer", lecturer);
                 intent.putExtra("position", position);
-//                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LecturerData.this);
-//                startActivity(intent, options.toBundle());
                 startActivity(intent);
                 finish();
             }
@@ -90,9 +88,7 @@ public class LecturerData extends AppCompatActivity {
         if(id == android.R.id.home){
             Intent intent;
             intent = new Intent(LecturerData.this, AddLecturer.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LecturerData.this);
-//            startActivity(intent, options.toBundle());
+            intent.putExtra("action", "add");
             startActivity(intent);
             finish();
             return true;
@@ -104,9 +100,6 @@ public class LecturerData extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent;
         intent = new Intent(LecturerData.this, AddLecturer.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LecturerData.this);
-//        startActivity(intent, options.toBundle());
         startActivity(intent);
         finish();
     }
