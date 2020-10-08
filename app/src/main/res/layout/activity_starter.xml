@@ -6,75 +6,115 @@
     android:layout_height="match_parent"
     tools:context=".Starter">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/starterToolbar"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/starterToolbarTitle" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageButton
-        android:id="@+id/addCourseStarterBtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_weight="1"
-        android:adjustViewBounds="true"
-        android:background="@drawable/button_save"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/loginStudentStarterBtn"
-        app:layout_constraintStart_toEndOf="@+id/loginStudentStarterBtn"
-        app:layout_constraintTop_toTopOf="@+id/loginStudentStarterBtn"
-        app:srcCompat="@drawable/blankbook" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <ImageButton
-        android:id="@+id/addLecturerStarterBtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_weight="1"
-        android:adjustViewBounds="true"
-        android:background="@drawable/button_save"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/addCourseStarterBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/addCourseStarterBtn"
-        app:layout_constraintTop_toTopOf="@+id/addCourseStarterBtn"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/teacher" />
+            <ImageView
+                android:id="@+id/angelwoodimgbg"
+                android:layout_width="478dp"
+                android:layout_height="475dp"
+                android:layout_marginEnd="88dp"
+                android:layout_marginBottom="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/angelwoodbg" />
 
-    <ImageButton
-        android:id="@+id/loginStudentStarterBtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_weight="1"
-        android:adjustViewBounds="true"
-        android:background="@drawable/button_save"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/addStudentStarterBtn"
-        app:layout_constraintStart_toEndOf="@+id/addStudentStarterBtn"
-        app:layout_constraintTop_toTopOf="@+id/addStudentStarterBtn"
-        app:srcCompat="@drawable/student" />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/starterToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:title="@string/starterToolbarTitle" />
 
-    <ImageButton
-        android:id="@+id/addStudentStarterBtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="32dp"
-        android:layout_weight="1"
-        android:adjustViewBounds="true"
-        android:background="@drawable/button_save"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/starterToolbar"
-        app:srcCompat="@drawable/student" />
+            <ImageView
+                android:id="@+id/addCourseStarterBtn"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/addLecturerStarterBtn"
+                app:layout_constraintTop_toBottomOf="@+id/dateTextView"
+                app:srcCompat="@drawable/addcourse" />
+
+            <ImageView
+                android:id="@+id/addLecturerStarterBtn"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toStartOf="@+id/addCourseStarterBtn"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dateTextView"
+                app:srcCompat="@drawable/addlecturer" />
+
+            <ImageView
+                android:id="@+id/addStudentStarterBtn"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toStartOf="@+id/loginStudentStarterBtn"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addLecturerStarterBtn"
+                app:srcCompat="@drawable/addstudent" />
+
+            <ImageView
+                android:id="@+id/loginStudentStarterBtn"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/addStudentStarterBtn"
+                app:layout_constraintTop_toBottomOf="@+id/addCourseStarterBtn"
+                app:srcCompat="@drawable/loginasstudent" />
+
+            <ImageView
+                android:id="@+id/angelwoodimg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/starterToolbar"
+                app:srcCompat="@drawable/angelwood" />
+
+            <TextView
+                android:id="@+id/gooddaytxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="@string/greetingadmin"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="@+id/angelwoodimg"
+                app:layout_constraintTop_toBottomOf="@+id/angelwoodimg" />
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                app:layout_constraintStart_toStartOf="@+id/gooddaytxt"
+                app:layout_constraintTop_toBottomOf="@+id/gooddaytxt" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

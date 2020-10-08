@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,8 @@ public class LecturerAdapter extends RecyclerView.Adapter<LecturerAdapter.CardVi
 
     private Context context;
     private ArrayList<Lecturer> listLecturer;
+    String gender;
+    ImageView lecturerImg;
     private ArrayList<Lecturer> getListLecturer() {
         return listLecturer;
     }
@@ -42,7 +45,14 @@ public class LecturerAdapter extends RecyclerView.Adapter<LecturerAdapter.CardVi
         final Lecturer lecturer = getListLecturer().get(position);
         holder.lbl_name.setText(lecturer.getName());
         holder.lbl_gender.setText(lecturer.getGender());
+        gender = lecturer.getGender();
+        if(gender.equalsIgnoreCase("Male")){
+            lecturerImg.setImageResource(R.drawable.teacher);
+        } else if(gender.equalsIgnoreCase("Female")){
+            lecturerImg.setImageResource(R.drawable.femaleteacher);
+        }
         holder.lbl_expertise.setText(lecturer.getExpertise());
+
     }
 
     @Override
@@ -58,6 +68,7 @@ public class LecturerAdapter extends RecyclerView.Adapter<LecturerAdapter.CardVi
             lbl_name = itemView.findViewById(R.id.labelNameLectAdp);
             lbl_gender = itemView.findViewById(R.id.labelGenderLectAdp);
             lbl_expertise = itemView.findViewById(R.id.labelExpertiseLectAdp);
+            lecturerImg = itemView.findViewById(R.id.lecturerIconImg);
 
         }
     }

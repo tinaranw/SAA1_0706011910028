@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -109,6 +110,7 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
     Button btn_register;
     String uid="", email="", pass="", name="", nim="", age="", gender="male",address="", action="";
     Student student;
+    ImageView studentImg;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
@@ -134,11 +136,10 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
         input_nim = findViewById(R.id.studentNIMRegisterInput);
         input_age = findViewById(R.id.studentAgeRegisterInput);
         input_address = findViewById(R.id.studentAddressRegisterInput);
+        studentImg = findViewById(R.id.registerImg);
 
         input_male = findViewById(R.id.studentMaleRadioButton);
         input_female = findViewById(R.id.studentFemaleRadioButton);
-
-
 
         input_email.getEditText().addTextChangedListener(this);
         input_pass.getEditText().addTextChangedListener(this);
@@ -161,6 +162,11 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
                     radioButton = findViewById(i);
                     gender = radioButton.getText().toString();
+                    if(gender.equalsIgnoreCase("Male")){
+                        studentImg.setImageResource(R.drawable.malestudent);
+                    } else if(gender.equalsIgnoreCase("Female")){
+                        studentImg.setImageResource(R.drawable.student);
+                    }
                 }
             });
             btn_register.setOnClickListener(new View.OnClickListener() {
@@ -184,15 +190,23 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
             if(student.getGender().equalsIgnoreCase("male")){
 //                rg_gender.check(R.id.lecturerMaleRadioButton);
                 input_male.setChecked(true);
+                studentImg.setImageResource(R.drawable.malestudent);
+
             }else{
 //                rg_gender.check(R.id.lecturerFemaleRadioButton);
                 input_female.setChecked(true);
+                studentImg.setImageResource(R.drawable.student);
             }
             rg_gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
                     radioButton = findViewById(i);
                     gender = radioButton.getText().toString();
+                    if(gender.equalsIgnoreCase("Male")){
+                        studentImg.setImageResource(R.drawable.malestudent);
+                    } else if(gender.equalsIgnoreCase("Female")){
+                        studentImg.setImageResource(R.drawable.student);
+                    }
                 }
             });
             btn_register.setText(R.string.editStudent);

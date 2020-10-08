@@ -45,7 +45,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CardView
     Dialog dialog;
     int pos = 0;
     private ArrayList<Student> listStudent;
-
+    ImageView studentImg;
+    String gender;
 
     private ArrayList<Student> getListStudent() {
         return listStudent;
@@ -73,6 +74,12 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CardView
         holder.labelnim.setText("NIM: " + student.getNim());
         holder.labelemail.setText("Email: " + student.getEmail());
         holder.labelgenderage.setText("Gender/Age: " + student.getGender() + " (" +student.getAge()+" y.o)");
+        gender = student.getGender();
+        if(gender.equalsIgnoreCase("Male")){
+            studentImg.setImageResource(R.drawable.malestudent);
+        } else if(gender.equalsIgnoreCase("Female")){
+            studentImg.setImageResource(R.drawable.student);
+        }
         holder.labeladdress.setText("Address: " + student.getAddress());
 
         holder.btn_edit.setOnClickListener(new View.OnClickListener(){
@@ -168,6 +175,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CardView
             dbStudent = FirebaseDatabase.getInstance().getReference("student");
             dialog = Glovar.loadingDialog(context);
             pos = getAdapterPosition();
+            studentImg = itemView.findViewById(R.id.studentIconImg);
 
         }
 

@@ -73,7 +73,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/studentPasswordLoginHint"
-                    android:inputType="textPassword|numberPassword" />
+                    android:inputType="textWebPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button

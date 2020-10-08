@@ -35,6 +35,7 @@ public class LoginStudent extends AppCompatActivity implements TextWatcher {
 
         studentEmail = findViewById(R.id.studentEmailLoginInput);
         studentPassword = findViewById(R.id.studentPasswordLoginInput);
+        fAuth = FirebaseAuth.getInstance();
 
         dialog = Glovar.loadingDialog(LoginStudent.this);
 
@@ -45,6 +46,12 @@ public class LoginStudent extends AppCompatActivity implements TextWatcher {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+//        if(fAuth.getCurrentUser() != null){
+//            Intent intent = new Intent(LoginStudent.this, MainActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
 
         login = findViewById(R.id.studentLoginBtn);
         login.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +65,7 @@ public class LoginStudent extends AppCompatActivity implements TextWatcher {
                             if(task.isSuccessful()){
                                 Toast.makeText(LoginStudent.this, "Logged in successfully!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginStudent.this, MainActivity.class);
+                                startActivity(intent);
                             } else {
                                 Toast.makeText(LoginStudent.this, "Failed to log in!", Toast.LENGTH_SHORT).show();
                             }

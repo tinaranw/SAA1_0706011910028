@@ -3,13 +3,18 @@ package com.uc.saa1_0706011910028;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+
 public class Starter extends AppCompatActivity {
 
-    ImageButton addLecturer, addCourse, loginStudent, registerStudent;
+    ImageView addLecturer, addCourse, loginStudent, registerStudent;
+    TextView dateText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +25,12 @@ public class Starter extends AppCompatActivity {
         addCourse = findViewById(R.id.addCourseStarterBtn);
         loginStudent = findViewById(R.id.loginStudentStarterBtn);
         registerStudent = findViewById(R.id.addStudentStarterBtn);
+        dateText = findViewById(R.id.dateTextView);
+
+        Calendar calendar = Calendar.getInstance();
+        String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+
+        dateText.setText(currentDate);
 
         addLecturer.setOnClickListener(new View.OnClickListener() {
             @Override

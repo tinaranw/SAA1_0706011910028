@@ -32,8 +32,9 @@ public class LecturerDetail extends AppCompatActivity {
     int pos = 0;
     TextView labelName, labelGender, labelExpertise;
     Lecturer lecturer;
-    ImageView btn_edit, btn_del;
+    ImageView btn_edit, btn_del, lecturerImg;
     Dialog dialog;
+    String gender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class LecturerDetail extends AppCompatActivity {
         btn_edit = findViewById(R.id.lecturerDetailEditImg);
         btn_del = findViewById(R.id.lecturerDetailDeleteImg);
         dialog = Glovar.loadingDialog(LecturerDetail.this);
+        lecturerImg = findViewById(R.id.lecturerimgPP);
 
         Intent intent = getIntent();
         pos = intent.getIntExtra("position",0);
@@ -57,6 +59,12 @@ public class LecturerDetail extends AppCompatActivity {
 
         labelName.setText(lecturer.getName());
         labelGender.setText(lecturer.getGender());
+        gender = lecturer.getGender();
+        if(gender.equalsIgnoreCase("Male")){
+            lecturerImg.setImageResource(R.drawable.teacher);
+        } else if(gender.equalsIgnoreCase("Female")){
+            lecturerImg.setImageResource(R.drawable.femaleteacher);
+        }
         labelExpertise.setText(lecturer.getExpertise());
 
         btn_del.setOnClickListener(new View.OnClickListener() {

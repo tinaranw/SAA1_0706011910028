@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -36,7 +37,7 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
     RadioButton radioButtonGender;
     Dialog dialog;
     Lecturer lecturer;
-
+    ImageView lecturerImg;
     private DatabaseReference mDatabase;
 
     @Override
@@ -55,6 +56,7 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
         toolbar = findViewById(R.id.addLecturerToolbar);
         setSupportActionBar(toolbar);
         addLecturer = findViewById(R.id.addLecturerBtn);
+        lecturerImg = findViewById(R.id.lecturerImg);
 
         lecturerGender = findViewById(R.id.lecturerGenderRadioGroup);
         lecturerGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -62,6 +64,11 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 radioButtonGender = findViewById(i);
                 gender = radioButtonGender.getText().toString();
+                if(gender.equalsIgnoreCase("Male")){
+                    lecturerImg.setImageResource(R.drawable.teacher);
+                } else if(gender.equalsIgnoreCase("Female")){
+                    lecturerImg.setImageResource(R.drawable.femaleteacher);
+                }
             }
         });
 
@@ -86,8 +93,11 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
             lecturerExpertise.getEditText().setText(lecturer.getExpertise());
             if(lecturer.getGender().equalsIgnoreCase("male")){
                 lecturerGender.check(R.id.lecturerMaleRadioButton);
+                lecturerImg.setImageResource(R.drawable.teacher);
+
             }else{
                 lecturerGender.check(R.id.lecturerFemaleRadioButton);
+                lecturerImg.setImageResource(R.drawable.femaleteacher);
             }
             addLecturer.setText(R.string.editlecturer);
             addLecturer.setOnClickListener(new View.OnClickListener() {
