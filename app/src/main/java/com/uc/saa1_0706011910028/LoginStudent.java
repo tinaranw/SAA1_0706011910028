@@ -57,23 +57,19 @@ public class LoginStudent extends AppCompatActivity implements TextWatcher {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                    dialog.show();
-                    fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(LoginStudent.this, "Logged in successfully!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginStudent.this, MainActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(LoginStudent.this, "Failed to log in!", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-
-
-
+                dialog.show();
+                fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(LoginStudent.this, "Logged in successfully!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginStudent.this, MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(LoginStudent.this, "Failed to log in!", Toast.LENGTH_SHORT).show();
+                }
+                }
+            });
             }
         });
     }
