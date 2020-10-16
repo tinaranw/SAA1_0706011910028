@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.uc.saa1_0706011910028.fragment.Courses;
+import com.uc.saa1_0706011910028.fragment.HomeFragment;
 import com.uc.saa1_0706011910028.fragment.MyAccount;
 import com.uc.saa1_0706011910028.fragment.MySchedule;
 
@@ -25,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         toolbar = findViewById(R.id.mainToolbar);
-        toolbar.setTitle("Home");
+//        toolbar.setTitle("Home");
+//        setSupportActionBar(toolbar);
 
-        toolbar = findViewById(R.id.mainToolbar);
-        toolbar.setTitle(R.string.menu_courses);
-        setSupportActionBar(toolbar);
+
+
 
         bottomNavigationView = findViewById(R.id.studentBottomNavBar);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -37,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment;
                 switch (item.getItemId()){
+
+                    case R.id.menu_home:
+                        toolbar.setTitle(R.string.menu_home);
+                        setSupportActionBar(toolbar);
+                        fragment = new HomeFragment() ;
+                        loadFragment(fragment);
+                        return true;
+
                     case R.id.menu_schedule:
                         toolbar.setTitle(R.string.menu_schedule);
                         setSupportActionBar(toolbar);
@@ -66,5 +75,11 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.studentFrameMain, fragment);
         transaction.commit();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        bottomNavigationView.setSelectedItemId(R.id.menu_home);
     }
 }

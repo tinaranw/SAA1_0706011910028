@@ -1,14 +1,11 @@
 package com.uc.saa1_0706011910028.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,19 +18,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.uc.saa1_0706011910028.R;
-import com.uc.saa1_0706011910028.Starter;
 import com.uc.saa1_0706011910028.model.Student;
 
-public class MyAccount extends Fragment {
+import java.text.DateFormat;
+import java.util.Calendar;
 
-    Button logoutBtn;
-    TextView labelname, labelnim, labelemail, labelgenderage, labeladdress, labelnim2;
+public class HomeFragment extends Fragment {
+
+    TextView date, greeting;
+    ImageView profilepic;
     DatabaseReference dbStudent;
     FirebaseAuth firebaseAuth;
     Student student;
-    ImageView profileimg;
 
-    public MyAccount() {
+    public HomeFragment() {
         // Required empty public constructor
     }
 
@@ -41,22 +39,16 @@ public class MyAccount extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_account, container, false);
-
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        labelname = view.findViewById(R.id.nameStudentAcc);
-        labelnim = view.findViewById(R.id.nimStudentAcc);
-        labelnim2 = view.findViewById(R.id.nimStudentAcc2);
-        labelemail = view.findViewById(R.id.emailStudentAcc);
-        labelgenderage = view.findViewById(R.id.genderageStudentAcc);
-        labeladdress = view.findViewById(R.id.addressStudentAcc);
-        profileimg = view.findViewById(R.id.profileStudentAcc);
-
+        date = view.findViewById(R.id.dateHomeFragment);
+        greeting = view.findViewById(R.id.greetingsHomeFragment);
+        profilepic = view.findViewById(R.id.studentPicHomeFragment);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -67,7 +59,6 @@ public class MyAccount extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()) {
                     student = snapshot.getValue(Student.class);
-
                     setData();
                 }
             }
@@ -77,30 +68,17 @@ public class MyAccount extends Fragment {
             }
         });
 
-        logoutBtn = view.findViewById(R.id.logoutBtn);
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(getActivity(), "Logged out successfully!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), Starter.class);
-                startActivity(intent);
-            }
-        });
     }
 
     public void setData(){
-        labelname.setText(student.getName());
-        labelemail.setText(student.getEmail());
-        labelnim.setText(student.getNim());
-        labelnim2.setText(student.getNim());
-        labelgenderage.setText("Gender: "+ student.getGender() + " | Age: "+ student.getAge() + " years old");
-        labeladdress.setText(student.getAddress());
+        Calendar calendar = Calendar.getInstance();
+        String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+        date.setText(currentDate);
+        greeting.setText("Hi, "+ student.getName());
         if(student.getGender().equalsIgnoreCase("male")){
-            profileimg.setImageResource(R.drawable.malestudent);
+            profilepic.setImageResource(R.drawable.malestudent);
         } else if (student.getGender().equalsIgnoreCase("female")){
-            profileimg.setImageResource(R.drawable.student);
+            profilepic.setImageResource(R.drawable.student);
         }
     }
-
 }

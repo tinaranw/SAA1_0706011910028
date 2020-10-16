@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
@@ -69,7 +70,13 @@ public class LoginStudent extends AppCompatActivity implements TextWatcher {
                         Toast.makeText(LoginStudent.this, "Failed to log in!", Toast.LENGTH_SHORT).show();
                 }
                 }
-            });
+            }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        dialog.cancel();
+                        Toast.makeText(LoginStudent.this, "Failed to login!", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }

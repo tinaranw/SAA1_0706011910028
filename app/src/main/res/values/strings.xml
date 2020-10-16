@@ -317,4 +317,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="logoutBtnText">Logout</string>
     <string name="greetingadmin">Good Day, Admin</string>
+    <string name="menu_home">Home</string>
+    <string name="myprofiletxt">Student Profile</string>
+    <string name="academictext">Academic</string>
+    <string name="mydatatxt">Student Data</string>
+    <string name="personaltxt">Personal</string>
 </resources>
