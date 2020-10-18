@@ -3,18 +3,22 @@
 
     <item
         android:id="@+id/menu_home"
-        android:icon="@drawable/home"
+        android:icon="@drawable/acc_home"
         android:title="@string/menu_home" />
     <item
         android:id="@+id/menu_schedule"
-        android:icon="@drawable/time_icon"
+        android:icon="@drawable/ic_baseline_access_time_24"
         android:title="@string/menu_schedule" />
     <item
         android:id="@+id/menu_courses"
-        android:icon="@drawable/course_icon"
+        android:icon="@drawable/acc_courses"
         android:title="@string/menu_courses" />
     <item
+        android:id="@+id/menu_tasks"
+        android:icon="@drawable/acc_task"
+        android:title="@string/menu_tasks" />
+    <item
         android:id="@+id/menu_account"
-        android:icon="@drawable/account_icon"
+        android:icon="@drawable/acc_person"
         android:title="@string/menu_account" />
 </menu>

@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
             <TextView
                 android:id="@+id/nimStudentAcc"
                 android:layout_width="0dp"
@@ -42,13 +43,13 @@
                 android:textSize="24sp"
                 android:textStyle="bold|italic"
                 app:layout_constraintStart_toStartOf="@+id/profileStudentAcc"
-                app:layout_constraintTop_toBottomOf="@+id/profileStudentAcc" />
+                app:layout_constraintTop_toBottomOf="@+id/changeProfilePicButton" />
 
             <TextView
                 android:id="@+id/nameStudentAcc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
                 android:maxLines="1"
@@ -68,6 +69,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileStudentAcc"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="32dp"
+                android:src="@drawable/student"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
@@ -218,16 +229,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
-            <ImageView
-                android:id="@+id/profileStudentAcc"
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:layout_marginStart="32dp"
-                android:src="@drawable/student"
-                app:layout_constraintBottom_toTopOf="@+id/nameStudentAcc"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/nameStudentAcc" />
-
             <Button
                 android:id="@+id/logoutBtn"
                 android:layout_width="0dp"
@@ -241,6 +242,17 @@
                 app:layout_constraintEnd_toEndOf="@+id/cardView2"
                 app:layout_constraintTop_toBottomOf="@+id/cardView2"
                 app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/changeProfilePicButton"
+                android:layout_width="47dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/cameraicon"
+                app:layout_constraintEnd_toEndOf="@+id/profileStudentAcc"
+                app:layout_constraintStart_toStartOf="@+id/profileStudentAcc"
+                app:layout_constraintTop_toBottomOf="@+id/profileStudentAcc" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

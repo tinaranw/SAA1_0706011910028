@@ -322,4 +322,14 @@
     <string name="academictext">Academic</string>
     <string name="mydatatxt">Student Data</string>
     <string name="personaltxt">Personal</string>
+    <string name="changepp">Edit Profile Picture</string>
+    <string name="menu_tasks">Tasks</string>
+    <string name="essayTxt">Essay</string>
+    <string name="videoTxt" />
+    <string name="vidTxt">Video</string>
+    <string name="codingTxt">Coding</string>
+    <string name="taskTxt">Short Description:</string>
+    <string name="taskTypeTxt">Type:</string>
+    <string name="addnewtasktxt">Add New Task</string>
+    <string name="otherTxt">Others</string>
 </resources>

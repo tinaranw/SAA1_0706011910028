@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.text.DateFormat;
 import java.util.Calendar;
 
@@ -15,6 +17,7 @@ public class Starter extends AppCompatActivity {
 
     ImageView addLecturer, addCourse, loginStudent, registerStudent;
     TextView dateText;
+    FirebaseAuth fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,12 @@ public class Starter extends AppCompatActivity {
         String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
 
         dateText.setText(currentDate);
+        fAuth = FirebaseAuth.getInstance();
+        if(fAuth.getCurrentUser() != null){
+            Intent intent = new Intent(Starter.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         addLecturer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,4 +92,5 @@ public class Starter extends AppCompatActivity {
             }
         });
     }
+
 }

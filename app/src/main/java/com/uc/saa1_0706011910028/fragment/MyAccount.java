@@ -1,7 +1,10 @@
 package com.uc.saa1_0706011910028.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +27,8 @@ import com.uc.saa1_0706011910028.R;
 import com.uc.saa1_0706011910028.Starter;
 import com.uc.saa1_0706011910028.model.Student;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MyAccount extends Fragment {
 
     Button logoutBtn;
@@ -31,7 +36,8 @@ public class MyAccount extends Fragment {
     DatabaseReference dbStudent;
     FirebaseAuth firebaseAuth;
     Student student;
-    ImageView profileimg;
+    ImageView changeProfileImg;
+    CircleImageView profileimg;
 
     public MyAccount() {
         // Required empty public constructor
@@ -56,6 +62,7 @@ public class MyAccount extends Fragment {
         labelgenderage = view.findViewById(R.id.genderageStudentAcc);
         labeladdress = view.findViewById(R.id.addressStudentAcc);
         profileimg = view.findViewById(R.id.profileStudentAcc);
+        changeProfileImg = view.findViewById(R.id.changeProfilePicButton);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -67,13 +74,21 @@ public class MyAccount extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()) {
                     student = snapshot.getValue(Student.class);
-
                     setData();
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        changeProfileImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //open gallery
+                Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(openGalleryIntent, 1000);
             }
         });
 
@@ -87,6 +102,18 @@ public class MyAccount extends Fragment {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1000){
+            if(resultCode == Activity.RESULT_OK){
+                Uri imageUri = data.getData();
+                profileimg.setImageURI(imageUri);
+
+            }
+        }
     }
 
     public void setData(){

@@ -1,5 +1,6 @@
 package com.uc.saa1_0706011910028;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -14,6 +15,7 @@ import com.uc.saa1_0706011910028.fragment.Courses;
 import com.uc.saa1_0706011910028.fragment.HomeFragment;
 import com.uc.saa1_0706011910028.fragment.MyAccount;
 import com.uc.saa1_0706011910028.fragment.MySchedule;
+import com.uc.saa1_0706011910028.fragment.Tasks;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,9 +30,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.mainToolbar);
 //        toolbar.setTitle("Home");
 //        setSupportActionBar(toolbar);
-
-
-
 
         bottomNavigationView = findViewById(R.id.studentBottomNavBar);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -59,6 +58,14 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new Courses();
                         loadFragment(fragment);
                         return true;
+
+                    case R.id.menu_tasks:
+                        toolbar.setTitle(R.string.menu_tasks);
+                        setSupportActionBar(toolbar);
+                        fragment = new Tasks();
+                        loadFragment(fragment);
+                        return true;
+
                     case R.id.menu_account:
                         toolbar.setTitle(R.string.menu_account);
                         setSupportActionBar(toolbar);
@@ -81,5 +88,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         bottomNavigationView.setSelectedItemId(R.id.menu_home);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

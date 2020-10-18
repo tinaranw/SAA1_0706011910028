@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.AddTask">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="104dp"
+                android:layout_height="107dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:src="@drawable/taskicon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/taskTitleInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView10">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Title" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <EditText
+                android:id="@+id/taskDescInput"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/adp_bg"
+                android:gravity="top"
+                android:inputType="text|textMultiLine"
+                app:layout_constraintEnd_toEndOf="@+id/taskTypeRadioGroup"
+                app:layout_constraintStart_toStartOf="@+id/taskTypeRadioGroup"
+                app:layout_constraintTop_toBottomOf="@+id/taskDescTitle" />
+
+            <EditText
+                android:id="@+id/taskDueDateInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:inputType="date"
+                app:layout_constraintEnd_toEndOf="@+id/taskTitleInput"
+                app:layout_constraintStart_toStartOf="@+id/taskTitleInput"
+                app:layout_constraintTop_toBottomOf="@+id/dueDateTxt" />
+
+            <TextView
+                android:id="@+id/taskDescTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/taskTxt"
+                app:layout_constraintStart_toStartOf="@+id/taskTypeRadioGroup"
+                app:layout_constraintTop_toBottomOf="@+id/taskTypeRadioGroup" />
+
+            <RadioGroup
+                android:id="@+id/taskTypeRadioGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/taskDueDateInput"
+                app:layout_constraintStart_toStartOf="@+id/taskTypeTxt"
+                app:layout_constraintTop_toBottomOf="@+id/taskTypeTxt">
+
+                <RadioButton
+                    android:id="@+id/essayRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/essayTxt" />
+
+                <RadioButton
+                    android:id="@+id/videoRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/vidTxt" />
+
+                <RadioButton
+                    android:id="@+id/otherRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/otherTxt" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/taskTypeTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/taskTypeTxt"
+                app:layout_constraintStart_toStartOf="@+id/taskDueDateInput"
+                app:layout_constraintTop_toBottomOf="@+id/taskDueDateInput" />
+
+            <Button
+                android:id="@+id/newTaskBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/button_selector"
+                android:enabled="false"
+                android:text="@string/addnewtasktxt"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/taskDescInput"
+                app:layout_constraintStart_toStartOf="@+id/taskDescInput"
+                app:layout_constraintTop_toBottomOf="@+id/taskDescInput" />
+
+            <TextView
+                android:id="@+id/dueDateTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Due Date:"
+                app:layout_constraintStart_toStartOf="@+id/taskTitleInput"
+                app:layout_constraintTop_toBottomOf="@+id/taskTitleInput" />
+
+            <TextView
+                android:id="@+id/addnewtasktxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="24dp"
+                android:text="Add New Task"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView10"
+                app:layout_constraintTop_toTopOf="@+id/imageView10" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/angelwoodbg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
