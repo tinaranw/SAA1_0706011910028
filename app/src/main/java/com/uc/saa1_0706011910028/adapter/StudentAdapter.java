@@ -105,7 +105,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CardView
                 fUser  = fAuth.getCurrentUser();
                 Log.d("fuser", String.valueOf(fUser));
                 new AlertDialog.Builder(context)
-                        .setTitle("Konfirmasi")
+                        .setTitle("Confirmation")
                         .setMessage("Are you sure to delete "+student.getName()+" data?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {

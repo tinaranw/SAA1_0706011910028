@@ -71,7 +71,7 @@ public class LecturerDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(LecturerDetail.this)
-                        .setTitle("Konfirmasi")
+                        .setTitle("Confirmation")
                         .setMessage("Are you sure to delete "+lecturer.getName()+" data?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -87,7 +87,7 @@ public class LecturerDetail extends AppCompatActivity {
                                             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                                                 Intent in = new Intent(LecturerDetail.this, LecturerData.class);
 //                                                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                                Toast.makeText(LecturerDetail.this, "Delete success!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(LecturerDetail.this, "Lecturer deleted successfully!", Toast.LENGTH_SHORT).show();
 //                                                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LecturerDetail.this);
 //                                                startActivity(in, options.toBundle());
                                                 startActivity(in);

@@ -1,9 +1,12 @@
 package com.uc.saa1_0706011910028.fragment;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.uc.saa1_0706011910028.Glovar;
 import com.uc.saa1_0706011910028.R;
 import com.uc.saa1_0706011910028.Starter;
 import com.uc.saa1_0706011910028.model.Student;
@@ -38,6 +43,7 @@ public class MyAccount extends Fragment {
     Student student;
     ImageView changeProfileImg;
     CircleImageView profileimg;
+    Dialog dialog;
 
     public MyAccount() {
         // Required empty public constructor
@@ -63,7 +69,7 @@ public class MyAccount extends Fragment {
         labeladdress = view.findViewById(R.id.addressStudentAcc);
         profileimg = view.findViewById(R.id.profileStudentAcc);
         changeProfileImg = view.findViewById(R.id.changeProfilePicButton);
-
+        dialog = Glovar.loadingDialog(getActivity());
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -96,10 +102,38 @@ public class MyAccount extends Fragment {
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(getActivity(), "Logged out successfully!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), Starter.class);
-                startActivity(intent);
+
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("Konfirmasi")
+                        .setMessage("Are you sure to logout of "+student.getName()+" ?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(final DialogInterface dialogInterface, int i) {
+                                dialog.show();
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        dialog.cancel();
+                                        FirebaseAuth.getInstance().signOut();
+                                        Toast.makeText(getActivity(), "Logged out successfully!", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getActivity(), Starter.class);
+                                        startActivity(intent);
+                                        dialogInterface.cancel();
+
+                                    }
+                                }, 2000);
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .create()
+                        .show();
+
             }
         });
     }

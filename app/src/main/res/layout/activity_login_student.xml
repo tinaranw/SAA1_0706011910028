@@ -64,6 +64,7 @@
                 android:id="@+id/studentPasswordLoginInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="@+id/studentEmailLoginInput"
                 app:layout_constraintStart_toStartOf="@+id/studentEmailLoginInput"

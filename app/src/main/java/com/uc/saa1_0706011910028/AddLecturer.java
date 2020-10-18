@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -114,6 +115,7 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
                         @Override
                         public void onSuccess(Void aVoid) {
                             dialog.cancel();
+                            Toast.makeText(AddLecturer.this, "Lecturer data updated!", Toast.LENGTH_SHORT).show();
                             Intent intent;
                             intent = new Intent(AddLecturer.this, LecturerData.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -134,7 +136,8 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
         mDatabase.child("lecturer").child(mid).setValue(lecturer).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Intent intent = new Intent(AddLecturer.this,Starter.class);
+                Toast.makeText(AddLecturer.this, "Lecturer added!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AddLecturer.this,LecturerData.class);
                 startActivity(intent);
                 finish();
             }

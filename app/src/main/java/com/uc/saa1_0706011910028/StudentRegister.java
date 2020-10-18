@@ -254,7 +254,7 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
                         public void onSuccess(Void aVoid) {
                             mAuth.signOut();
                             Toast.makeText(StudentRegister.this, "Student Registered", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent (StudentRegister.this, Starter.class);
+                            Intent intent = new Intent (StudentRegister.this, StudentData.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         }
