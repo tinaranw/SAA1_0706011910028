@@ -58,9 +58,7 @@
         <item>Sunday</item>
     </string-array>
 
-    <string-array name="lecturer">
-        <item>Dummy</item>
-    </string-array>
+    <string-array name="lecturer"></string-array>
 
     <string-array name="timeStart">
         <item>07:30:00</item>
@@ -332,4 +330,5 @@
     <string name="taskTypeTxt">Type:</string>
     <string name="addnewtasktxt">Add New Task</string>
     <string name="otherTxt">Others</string>
+    <string name="infoTxt">Course Info</string>
 </resources>

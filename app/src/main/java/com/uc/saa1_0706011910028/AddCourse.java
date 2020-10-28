@@ -11,18 +11,32 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.uc.saa1_0706011910028.model.Course;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddCourse extends AppCompatActivity implements TextWatcher{
 
     Spinner spinnerDay, spinnerTimeStart, spinnerTimeEnd, spinnerLecturer;
     TextInputLayout courseSubject;
-    String course;
+    String course, day, timeStart, timeEnd;
     Button addCourse;
-
+    List<String> lecturer_array;
+    private DatabaseReference mDatabase;
+    String action;
+    Course courseModel;
     Toolbar toolbar;
 
     @Override
@@ -56,16 +70,12 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
 
         addCourse = findViewById(R.id.addCourseBtn);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
         toolbar = findViewById(R.id.addCourseToolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
 
         spinnerTimeStart.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -121,6 +131,67 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
             }
         });
 
+        action = getIntent().getStringExtra("action");
+        if(action.equalsIgnoreCase("add")){
+            toolbar.setTitle("Add Course");
+            addCourse.setText("Add");
+            addCourse.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    course = courseSubject.getEditText().getText().toString().trim();
+                    day = spinnerDay.getSelectedItem().toString();
+                    timeEnd = spinnerTimeEnd.getSelectedItem().toString();
+                    timeStart = spinnerTimeStart.getSelectedItem().toString();
+                }
+            });
+        } else if(action.equalsIgnoreCase("edit")) {
+            toolbar.setTitle("Edit Course");
+            addCourse.setText("Update");
+            courseModel = getIntent().getParcelableExtra("edit_data_course");
+            addCourse.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+        }
+
+        lecturer_array = new ArrayList<>();
+        mDatabase.child("lecturer").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot childSnapshot: dataSnapshot.getChildren()){
+                    String firebaseLecturer = childSnapshot.child("name").getValue(String.class);
+                    lecturer_array.add(firebaseLecturer);
+                }
+
+                ArrayAdapter<String> adapterLecturer = new ArrayAdapter<>(AddCourse.this, android.R.layout.simple_spinner_item, lecturer_array);
+                adapterLecturer.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerLecturer.setAdapter(adapterLecturer);
+
+                if(action.equalsIgnoreCase("edit")){
+                    int index = adapterLecturer.getPosition(courseModel.getLecturer());
+                    spinnerLecturer.setSelection(index);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public void addCourse(String course,String day, String timeStart, String timeEnd, String lecturer){
+        String id = mDatabase.child("course").push().getKey();
+        Course courseObj = new Course(id, course, day, timeStart, timeEnd, lecturer);
+        mDatabase.child("course").child("id").setValue(courseObj).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+            }
+        });
     }
 
     @Override
@@ -129,9 +200,7 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
         if(id == android.R.id.home){
             Intent intent;
             intent = new Intent(AddCourse.this, Starter.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(AddCourse.this);
-//            startActivity(intent, options.toBundle());
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
             return true;
@@ -143,9 +212,7 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
     public void onBackPressed() {
         Intent intent;
         intent = new Intent(AddCourse.this, Starter.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(AddCourse.this);
-//        startActivity(intent, options.toBundle());
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
     }
@@ -157,7 +224,10 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        course  = courseSubject.getEditText().getText().toString().trim();
+        course = courseSubject.getEditText().getText().toString().trim();
+        day = spinnerDay.getSelectedItem().toString();
+        timeEnd = spinnerTimeEnd.getSelectedItem().toString();
+        timeStart = spinnerTimeStart.getSelectedItem().toString();
 
         if(!course.isEmpty() && spinnerDay != null && spinnerDay.getSelectedItem() !=null && spinnerLecturer != null && spinnerLecturer.getSelectedItem() !=null && spinnerTimeStart != null && spinnerTimeStart.getSelectedItem() !=null && spinnerTimeEnd != null && spinnerTimeEnd.getSelectedItem() !=null){
             addCourse.setEnabled(true);

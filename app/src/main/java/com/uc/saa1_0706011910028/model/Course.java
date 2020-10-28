@@ -44,29 +44,54 @@ public class Course implements Parcelable {
         }
     };
 
+    public String getId() {
+        return id;
+    }
+
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getSubject() {
+        return subject;
     }
 
     public void setSubject(String subject) {
         this.subject = subject;
     }
 
+    public String getDay() {
+        return day;
+    }
+
     public void setDay(String day) {
         this.day = day;
+    }
+
+    public String getStart() {
+        return start;
     }
 
     public void setStart(String start) {
         this.start = start;
     }
 
+    public String getEnd() {
+        return end;
+    }
+
     public void setEnd(String end) {
         this.end = end;
+    }
+
+    public String getLecturer() {
+        return lecturer;
     }
 
     public void setLecturer(String lecturer) {
         this.lecturer = lecturer;
     }
+
 
     @Override
     public int describeContents() {
