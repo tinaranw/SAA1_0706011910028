@@ -429,7 +429,7 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
             course = intent.getParcelableExtra("edit_data_course");
             String subj = course.getSubject();
             Log.d("editDataCourse", subj);
-            courseSubject.getEditText().setText(subj);
+//            courseSubject.getEditText().setText(subj);//Yang error
 
             int dayIndex = adapterDays.getPosition(course.getDay());
             spinnerDay.setSelection(dayIndex);
@@ -514,7 +514,7 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
         subject = courseSubject.getEditText().getText().toString().trim();
         day = spinnerDay.getSelectedItem().toString();
         timeStart = spinnerTimeStart.getSelectedItem().toString();
-        timeEnd = spinnerTimeEnd.getSelectedItem().toString();
+        timeEnd = spinnerTimeEnd.getSelectedItem().toString(); //Yang error
         lecturer = spinnerLecturer.getSelectedItem().toString();
 
         if (!subject.isEmpty()) {

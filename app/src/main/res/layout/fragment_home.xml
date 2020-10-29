@@ -73,13 +73,21 @@
                 android:id="@+id/imageView13"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/angelwoodbanner"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/studentCalendarView"
+                app:layout_constraintStart_toStartOf="@+id/studentCalendarView"
+                app:layout_constraintTop_toBottomOf="@+id/studentCalendarView" />
+
+            <CalendarView
+                android:id="@+id/studentCalendarView"
+                android:layout_width="0dp"
+                android:layout_height="320dp"
+                android:layout_marginTop="24dp"
+                android:background="#52EAC7C7"
+                app:layout_constraintEnd_toEndOf="@+id/searchView"
+                app:layout_constraintStart_toStartOf="@+id/searchView"
                 app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
