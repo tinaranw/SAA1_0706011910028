@@ -427,8 +427,9 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
 //            toolbar.setTitle("Edit Course");
             addCourse.setText("Edit");
             course = intent.getParcelableExtra("edit_data_course");
-            Log.d("editDataCourse", course.getSubject());
-            courseEditText.setText(course.getSubject());
+            String subj = course.getSubject();
+            Log.d("editDataCourse", subj);
+            courseSubject.getEditText().setText(subj);
 
             int dayIndex = adapterDays.getPosition(course.getDay());
             spinnerDay.setSelection(dayIndex);
@@ -509,6 +510,7 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
+//        setSpinnerTimeEnd(position);
         subject = courseSubject.getEditText().getText().toString().trim();
         day = spinnerDay.getSelectedItem().toString();
         timeStart = spinnerTimeStart.getSelectedItem().toString();
