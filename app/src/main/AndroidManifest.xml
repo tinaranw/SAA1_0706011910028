@@ -9,14 +9,15 @@
         android:roundIcon="@drawable/app_bg"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CourseData"></activity>
+        <activity android:name=".adapter.CourseFragmentAdapter"></activity>
+        <activity android:name=".AddCourse" />
+        <activity android:name=".CourseData" />
         <activity android:name=".adapter.StudentAdapter" />
         <activity android:name=".StudentData" />
         <activity android:name=".LecturerDetail" />
         <activity android:name=".adapter.LecturerAdapter" />
         <activity android:name=".LecturerData" />
         <activity android:name=".Starter" />
-        <activity android:name=".AddCourse" />
         <activity android:name=".AddLecturer" />
         <activity android:name=".LoginStudent" />
         <activity android:name=".StudentRegister" />

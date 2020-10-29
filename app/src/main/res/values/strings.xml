@@ -46,7 +46,8 @@
     <string name="editlecturer">Edit Lecturer</string>
     <string name="addStudent">Add Student</string>
     <string name="editStudent">Edit Student</string>
-
+    <string name="editCourse">Edit Course</string>
+    <string name="courseDataTitle">Course Data</string>
 
     <string-array name="days">
         <item>Monday</item>
@@ -331,4 +332,5 @@
     <string name="addnewtasktxt">Add New Task</string>
     <string name="otherTxt">Others</string>
     <string name="infoTxt">Course Info</string>
+    <string name="courselist">Course List</string>
 </resources>

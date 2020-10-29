@@ -156,9 +156,7 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
         if(id == android.R.id.home){
             Intent intent;
             intent = new Intent(AddLecturer.this, Starter.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(AddLecturer.this);
-//            startActivity(intent, options.toBundle());
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
             return true;
@@ -166,9 +164,7 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
         } else if(id == R.id.lecturerList){
             Intent intent;
             intent = new Intent(AddLecturer.this, LecturerData.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(AddLecturer.this);
-//            startActivity(intent, options.toBundle());
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
             return true;
