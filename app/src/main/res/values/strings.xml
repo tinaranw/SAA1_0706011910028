@@ -333,4 +333,6 @@
     <string name="otherTxt">Others</string>
     <string name="infoTxt">Course Info</string>
     <string name="courselist">Course List</string>
+    <string name="enrollBtn">Enroll</string>
+    <string name="removeScheduleBtn">Remove</string>
 </resources>

@@ -7,7 +7,7 @@
     tools:context=".adapter.CourseAdapter">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewStudent"
+        android:id="@+id/cardViewCourse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"

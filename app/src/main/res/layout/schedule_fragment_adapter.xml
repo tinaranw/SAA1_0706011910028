@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".adapter.CourseFragmentAdapter">
+    tools:context=".adapter.ScheduleFragmentAdapter">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewCourseFragment"
+        android:id="@+id/cardViewScheduleFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -24,7 +24,7 @@
 
 
             <ImageView
-                android:id="@+id/courseFragmentBg"
+                android:id="@+id/ScheduleFragmentBg"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -34,19 +34,19 @@
                 app:srcCompat="@drawable/adp_bg" />
 
             <ImageView
-                android:id="@+id/courseFragmentIconImg"
+                android:id="@+id/ScheduleFragmentIconImg"
                 android:layout_width="71dp"
                 android:layout_height="61dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/courseFragmentBg"
+                app:layout_constraintBottom_toBottomOf="@+id/ScheduleFragmentBg"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/blankbook" />
 
             <TextView
-                android:id="@+id/labelCourseFragmentName"
+                android:id="@+id/labelScheduleFragmentName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -55,18 +55,18 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/courseFragmentIconImg"
-                app:layout_constraintTop_toTopOf="@+id/courseFragmentIconImg" />
+                app:layout_constraintStart_toEndOf="@+id/ScheduleFragmentIconImg"
+                app:layout_constraintTop_toTopOf="@+id/ScheduleFragmentIconImg" />
 
             <TextView
-                android:id="@+id/labelCourseFragmentLecturer"
+                android:id="@+id/labelScheduleFragmentLecturer"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="TextView"
-                app:layout_constraintEnd_toEndOf="@+id/labelCourseFragmentName"
-                app:layout_constraintStart_toStartOf="@+id/labelCourseFragmentName"
-                app:layout_constraintTop_toBottomOf="@+id/labelCourseFragmentName" />
+                app:layout_constraintEnd_toEndOf="@+id/labelScheduleFragmentName"
+                app:layout_constraintStart_toStartOf="@+id/labelScheduleFragmentName"
+                app:layout_constraintTop_toBottomOf="@+id/labelScheduleFragmentName" />
 
             <TextView
                 android:id="@+id/textCourseInfo"
@@ -76,11 +76,11 @@
                 android:text="Course Info"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/courseFragmentIconImg"
-                app:layout_constraintTop_toBottomOf="@+id/courseFragmentBg" />
+                app:layout_constraintStart_toStartOf="@+id/ScheduleFragmentIconImg"
+                app:layout_constraintTop_toBottomOf="@+id/ScheduleFragmentBg" />
 
             <TextView
-                android:id="@+id/labelCourseFragmentDay"
+                android:id="@+id/labelScheduleFragmentDay"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -91,27 +91,27 @@
                 app:layout_constraintTop_toBottomOf="@+id/textCourseInfo" />
 
             <TextView
-                android:id="@+id/labelCourseFragmentTime"
+                android:id="@+id/labelScheduleFragmentTime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="TextView"
-                app:layout_constraintEnd_toEndOf="@+id/labelCourseFragmentDay"
-                app:layout_constraintStart_toStartOf="@+id/labelCourseFragmentDay"
-                app:layout_constraintTop_toBottomOf="@+id/labelCourseFragmentDay" />
+                app:layout_constraintEnd_toEndOf="@+id/labelScheduleFragmentDay"
+                app:layout_constraintStart_toStartOf="@+id/labelScheduleFragmentDay"
+                app:layout_constraintTop_toBottomOf="@+id/labelScheduleFragmentDay" />
 
             <Button
-                android:id="@+id/enrollCourseFragmentBtn"
+                android:id="@+id/removeScheduleFragmentBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/button_save"
-                android:text="@string/enrollBtn"
+                android:text="@string/removeScheduleBtn"
                 android:textColor="#FFF3F3"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/labelCourseFragmentTime"
-                app:layout_constraintTop_toBottomOf="@+id/labelCourseFragmentTime" />
+                app:layout_constraintEnd_toEndOf="@+id/labelScheduleFragmentTime"
+                app:layout_constraintTop_toBottomOf="@+id/labelScheduleFragmentTime" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

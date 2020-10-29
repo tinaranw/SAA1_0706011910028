@@ -9,7 +9,8 @@
         android:roundIcon="@drawable/app_bg"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".adapter.CourseFragmentAdapter"></activity>
+        <activity android:name=".adapter.ScheduleFragmentAdapter"></activity>
+        <activity android:name=".adapter.CourseFragmentAdapter" />
         <activity android:name=".AddCourse" />
         <activity android:name=".CourseData" />
         <activity android:name=".adapter.StudentAdapter" />
