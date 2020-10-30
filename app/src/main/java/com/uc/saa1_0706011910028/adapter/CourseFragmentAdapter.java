@@ -5,7 +5,6 @@ package com.uc.saa1_0706011910028.adapter;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -118,13 +117,14 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
                     int courseStartInt = Integer.parseInt(course.getStart().replace(":",""));
                     int courseEndInt = Integer.parseInt(course.getEnd().replace(":",""));
 
-                    if (!pickedCourse.getDay().equalsIgnoreCase(course.getDay()) || courseStartInt>=selectedCourseStartInt || courseEndInt<=selectedCourseEndInt){
-                        conflict = false;
-                        Log.d("Checking", String.valueOf(conflict));
-                    }else{
-                        conflict = true;
-                        Log.d("Checking", String.valueOf(conflict));
-                        break;
+                    if (pickedCourse.getDay().equalsIgnoreCase(course.getDay())) {
+
+                        if (selectedCourseStartInt >= courseStartInt && selectedCourseStartInt <= courseEndInt) {
+                            conflict = true;
+                        }
+                        if (selectedCourseEndInt >= courseStartInt && selectedCourseEndInt <= courseEndInt) {
+                            conflict = true;
+                        }
                     }
                 }
 

@@ -313,7 +313,7 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
 //        spinnerTimeEnd.setAdapter(adapterend);
 //    }
     Spinner spinnerDay, spinnerTimeStart, spinnerTimeEnd, spinnerLecturer;
-    TextInputLayout courseSubject;
+    TextInputLayout courseSubject, editcourseSubject;
     TextInputEditText courseEditText;
     Button addCourse;
     Toolbar toolbar;
@@ -334,6 +334,7 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
         toolbar = findViewById(R.id.addCourseToolbar);
 
         courseSubject = findViewById(R.id.courseSubjectInput);
+        editcourseSubject = findViewById(R.id.courseSubjectInput);
         courseEditText = findViewById(R.id.courseSubjectEditText);
         spinnerDay = findViewById(R.id.courseDaySpinner);
         spinnerTimeStart = findViewById(R.id.courseTimeStartSpinner);
@@ -429,7 +430,7 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
             course = intent.getParcelableExtra("edit_data_course");
             String subj = course.getSubject();
             Log.d("editDataCourse", subj);
-//            courseSubject.getEditText().setText(subj);//Yang error
+            editcourseSubject.getEditText().setText(subj);//Yang error
 
             int dayIndex = adapterDays.getPosition(course.getDay());
             spinnerDay.setSelection(dayIndex);

@@ -120,7 +120,7 @@ public class MyAccount extends Fragment {
                                         Intent intent = new Intent(getActivity(), Starter.class);
                                         startActivity(intent);
                                         dialogInterface.cancel();
-
+                                        getActivity().finish();
                                     }
                                 }, 2000);
                             }
