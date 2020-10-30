@@ -37,281 +37,6 @@ import java.util.Map;
 
 public class AddCourse extends AppCompatActivity implements TextWatcher{
 
-
-    //    List<String> lecturer_array;
-//    private DatabaseReference mDatabase;
-//    String action;
-//    Course courseModel;
-//    Toolbar toolbar;
-//    Dialog dialog;
-//    ArrayAdapter<CharSequence> adapterend;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_add_course);
-//
-//        dialog = Glovar.loadingDialog(AddCourse.this);
-//
-//        spinnerDay = findViewById(R.id.courseDaySpinner);
-//        ArrayAdapter<CharSequence> adapterday = ArrayAdapter.createFromResource(AddCourse.this,
-//                R.array.days, android.R.layout.simple_spinner_item);
-//        adapterday.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinnerDay.setAdapter(adapterday);
-//
-//        spinnerTimeStart = findViewById(R.id.courseTimeStartSpinner);
-//        ArrayAdapter<CharSequence> adapterTimeStart = ArrayAdapter.createFromResource(AddCourse.this,
-//                R.array.timeStart, android.R.layout.simple_spinner_item);
-//        adapterTimeStart.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinnerTimeStart.setAdapter(adapterTimeStart);
-//
-//        spinnerLecturer = findViewById(R.id.courseLecturerSpinner);
-//        ArrayAdapter<CharSequence> adapterLecturer = ArrayAdapter.createFromResource(AddCourse.this,
-//                R.array.lecturer, android.R.layout.simple_spinner_item);
-//        adapterLecturer.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinnerLecturer.setAdapter(adapterLecturer);
-//
-//        spinnerTimeEnd = findViewById(R.id.courseTimeEndSpinner);
-//
-//        courseSubject = findViewById(R.id.courseSubjectInput);
-//
-//        courseSubject.getEditText().addTextChangedListener(this);
-//
-//        addCourse = findViewById(R.id.addCourseBtn);
-//
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
-//
-//        toolbar = findViewById(R.id.addCourseToolbar);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//
-//        spinnerTimeStart.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                adapterend = null;
-//                setSpinnerEnd(position);
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-//
-//        action = getIntent().getStringExtra("action");
-//        if(action.equalsIgnoreCase("add")){
-//            toolbar.setTitle("Add Course");
-//            addCourse.setText("Add");
-//            addCourse.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    course = courseSubject.getEditText().getText().toString().trim();
-//                    day = spinnerDay.getSelectedItem().toString();
-//                    timeEnd = spinnerTimeEnd.getSelectedItem().toString();
-//                    timeStart = spinnerTimeStart.getSelectedItem().toString();
-//                    lecturer = spinnerLecturer.getSelectedItem().toString();
-//                    addCourse(course, day, timeStart, timeEnd,lecturer);
-//                }
-//            });
-//        } else  {
-//            getSupportActionBar().setTitle("Edit Course");
-//            courseModel = getIntent().getParcelableExtra("edit_data_course");
-//            Log.d("hah", courseModel.getSubject());
-//            String subject = courseModel.getSubject();
-//            courseSubject = findViewById(R.id.courseSubjectInput);
-//            courseSubject.getEditText().setText(subject);
-//
-//            int dayInd =  adapterday.getPosition(courseModel.getDay());
-//            spinnerDay.setSelection(dayInd);
-//
-//            int timeStartInd =  adapterTimeStart.getPosition(courseModel.getStart());
-//            spinnerTimeStart.setSelection(timeStartInd);
-//
-//            setSpinnerEnd(timeStartInd);
-//            int timeEndInd =  adapterend.getPosition(courseModel.getEnd());
-//            spinnerTimeEnd.setSelection(timeEndInd);
-//
-//            int lecturerInd =  adapterend.getPosition(courseModel.getLecturer());
-//            spinnerLecturer.setSelection(lecturerInd);
-//            addCourse.setText("Edit Course");
-//            addCourse.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    dialog.show();
-//                    getFormValue();
-//                    Map<String,Object> params = new HashMap<>();
-//                    params.put("subject", course);
-//                    params.put("day", day);
-//                    params.put("start", timeStart);
-//                    params.put("end", timeEnd);
-//                    params.put("lecturer", lecturer);
-//
-//                    mDatabase.child(courseModel.getId()).updateChildren(params).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                        @Override
-//                        public void onSuccess(Void aVoid) {
-//                            dialog.cancel();
-//                            Intent intent;
-//                            intent = new Intent(AddCourse.this, CourseData.class);
-//                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                            startActivity(intent);
-//                            finish();
-//                        }
-//                    });
-//                }
-//            });
-//        }
-//
-//        lecturer_array = new ArrayList<>();
-//        mDatabase.child("lecturer").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                for(DataSnapshot childSnapshot: dataSnapshot.getChildren()){
-//                    String firebaseLecturer = childSnapshot.child("name").getValue(String.class);
-//                    lecturer_array.add(firebaseLecturer);
-//                }
-//
-//                ArrayAdapter<String> adapterLecturer = new ArrayAdapter<>(AddCourse.this, android.R.layout.simple_spinner_item, lecturer_array);
-//                adapterLecturer.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                spinnerLecturer.setAdapter(adapterLecturer);
-//
-//                if(action.equalsIgnoreCase("edit")){
-//                    int index = adapterLecturer.getPosition(courseModel.getLecturer());
-//                    spinnerLecturer.setSelection(index);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//
-//    }
-//
-//    public void addCourse(String course,String day, String timeStart, String timeEnd, String lecturer){
-//        String id = mDatabase.child("course").push().getKey();
-//        Course courseObj = new Course(id, course, day, timeStart, timeEnd, lecturer);
-//        mDatabase.child("course").child(id).setValue(courseObj).addOnSuccessListener(new OnSuccessListener<Void>() {
-//            @Override
-//            public void onSuccess(Void aVoid) {
-//                Toast.makeText(AddCourse.this, "Course added!", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(AddCourse.this,CourseData.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//        if(id == android.R.id.home){
-//            Intent intent;
-//            intent = new Intent(AddCourse.this, Starter.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            startActivity(intent);
-//            finish();
-//            return true;
-//        }else if(id == R.id.courseList){
-//            Intent intent;
-//            intent = new Intent(AddCourse.this, CourseData.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            startActivity(intent);
-//            finish();
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-//
-//    @Override
-//    public void onBackPressed() {
-//        Intent intent;
-//        intent = new Intent(AddCourse.this, Starter.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
-//        finish();
-//    }
-//
-//    @Override
-//    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//    }
-//
-//    @Override
-//    public void onTextChanged(CharSequence s, int start, int before, int count) {
-//        getFormValue();
-//        if(!course.isEmpty() && spinnerDay != null && spinnerDay.getSelectedItem() !=null && spinnerLecturer != null && spinnerLecturer.getSelectedItem() !=null && spinnerTimeStart != null && spinnerTimeStart.getSelectedItem() !=null && spinnerTimeEnd != null && spinnerTimeEnd.getSelectedItem() !=null && spinnerLecturer.getSelectedItem() !=null){
-//            addCourse.setEnabled(true);
-//        } else {
-//            addCourse.setEnabled(false);
-//        }
-//    }
-//
-//    @Override
-//    public void afterTextChanged(Editable s) {
-//
-//    }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.course_menu, menu);
-//        return true;
-//    }
-//
-//    public void getFormValue(){
-//
-//        course = courseSubject.getEditText().getText().toString().trim();
-//        day = spinnerDay.getSelectedItem().toString();
-//        timeEnd = spinnerTimeEnd.getSelectedItem().toString();
-//        timeStart = spinnerTimeStart.getSelectedItem().toString();
-//        lecturer = spinnerLecturer.getSelectedItem().toString();
-//    }
-//
-//    public void setSpinnerEnd(int position){
-//        if(position==0){
-//            adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.timeEnd0730, android.R.layout.simple_spinner_item);
-//        }else if(position==1){
-//            adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.timeEnd0800, android.R.layout.simple_spinner_item);
-//        }else if(position==2){
-//            adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.timeEnd0830, android.R.layout.simple_spinner_item);
-//        }else if(position==3){
-//            adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.timeEnd0900, android.R.layout.simple_spinner_item);
-//        }else if(position==4){
-//            adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.timeEnd0930, android.R.layout.simple_spinner_item);
-//        }else if(position==5){
-//            adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.timeEnd1000, android.R.layout.simple_spinner_item);
-//        }else if(position==6){
-//            adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.timeEnd1030, android.R.layout.simple_spinner_item);
-//        }else if(position==7){
-//            adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.timeEnd1100, android.R.layout.simple_spinner_item);
-//        }else if(position==8){
-//            adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.timeEnd1130, android.R.layout.simple_spinner_item);
-//        }else if(position==9){
-//            adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.timeEnd1200, android.R.layout.simple_spinner_item);
-//        }else if(position==10){
-//            adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.timeEnd1230, android.R.layout.simple_spinner_item);
-//        }else if(position==11){
-//            adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.timeEnd1300, android.R.layout.simple_spinner_item);
-//        }else if(position==12){
-//            adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.timeEnd1330, android.R.layout.simple_spinner_item);
-//        }else if(position==13){
-//            adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.timeEnd1400, android.R.layout.simple_spinner_item);
-//        }else if(position==14){
-//            adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.timeEnd1430, android.R.layout.simple_spinner_item);
-//        }else if(position==15){
-//            adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.timeEnd1500, android.R.layout.simple_spinner_item);
-//        }else if(position==16){
-//            adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.timeEnd1530, android.R.layout.simple_spinner_item);
-//        }else if(position==17){
-//            adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.timeEnd1600, android.R.layout.simple_spinner_item);
-//        }else if(position==18){
-//            adapterend = ArrayAdapter.createFromResource(AddCourse.this, R.array.timeEnd1630, android.R.layout.simple_spinner_item);
-//        }
-//
-//        adapterend.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinnerTimeEnd.setAdapter(adapterend);
-//    }
     Spinner spinnerDay, spinnerTimeStart, spinnerTimeEnd, spinnerLecturer;
     TextInputLayout courseSubject, editcourseSubject;
     TextInputEditText courseEditText;
@@ -334,15 +59,12 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
         toolbar = findViewById(R.id.addCourseToolbar);
 
         courseSubject = findViewById(R.id.courseSubjectInput);
-        editcourseSubject = findViewById(R.id.courseSubjectInput);
         courseEditText = findViewById(R.id.courseSubjectEditText);
         spinnerDay = findViewById(R.id.courseDaySpinner);
         spinnerTimeStart = findViewById(R.id.courseTimeStartSpinner);
         spinnerTimeEnd = findViewById(R.id.courseTimeEndSpinner);
         spinnerLecturer = findViewById(R.id.courseLecturerSpinner);
         addCourse = findViewById(R.id.addCourseBtn);
-
-        courseSubject.getEditText().addTextChangedListener(this);
 
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -406,8 +128,10 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
 
         Intent intent = getIntent();
         action = intent.getStringExtra("action");
+        Log.d("1", "=============1");
         if(action.equalsIgnoreCase("add")){
             getSupportActionBar().setTitle(R.string.addCourseTitle);
+            Log.d("2", "=============2");
             addCourse.setText("Add");
             addCourse.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -430,7 +154,8 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
             course = intent.getParcelableExtra("edit_data_course");
             String subj = course.getSubject();
             Log.d("editDataCourse", subj);
-            editcourseSubject.getEditText().setText(subj);//Yang error
+
+            courseSubject.getEditText().setText(subj);//Yang error
 
             int dayIndex = adapterDays.getPosition(course.getDay());
             spinnerDay.setSelection(dayIndex);
@@ -478,6 +203,7 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
                 }
             });
         }
+        courseSubject.getEditText().addTextChangedListener(this);
     }
 
     public void addCourse(String subject, String day, String timeStart, String timeEnd, String lecturer){

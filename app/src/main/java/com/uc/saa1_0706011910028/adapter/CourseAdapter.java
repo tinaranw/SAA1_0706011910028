@@ -68,6 +68,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
         holder.labelday.setText("Day: " + course.getDay());
         holder.labeltime.setText("Time: " + course.getStart() + " - " + course.getEnd());
 
+
+
         holder.btn_edit.setOnClickListener(new View.OnClickListener(){
 
             @Override
