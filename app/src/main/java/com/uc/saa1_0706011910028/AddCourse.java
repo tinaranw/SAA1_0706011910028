@@ -46,6 +46,7 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
     Course course;
     Dialog dialog;
     private DatabaseReference mDatabase;
+    private DatabaseReference mCourse;
     List<String> lecturer_array;
     ArrayAdapter<CharSequence> adapterend;
 
@@ -56,6 +57,7 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
 
         dialog = Glovar.loadingDialog(this);
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        mCourse = FirebaseDatabase.getInstance().getReference("course");
         toolbar = findViewById(R.id.addCourseToolbar);
 
         courseSubject = findViewById(R.id.courseSubjectInput);
@@ -128,10 +130,8 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
 
         Intent intent = getIntent();
         action = intent.getStringExtra("action");
-        Log.d("1", "=============1");
         if(action.equalsIgnoreCase("add")){
             getSupportActionBar().setTitle(R.string.addCourseTitle);
-            Log.d("2", "=============2");
             addCourse.setText("Add");
             addCourse.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -149,7 +149,6 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
             });
         }else {
             getSupportActionBar().setTitle(R.string.editCourse);
-//            toolbar.setTitle("Edit Course");
             addCourse.setText("Edit");
             course = intent.getParcelableExtra("edit_data_course");
             String subj = course.getSubject();
@@ -180,15 +179,16 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
                     timeStart = spinnerTimeStart.getSelectedItem().toString();
                     timeEnd = spinnerTimeEnd.getSelectedItem().toString();
                     lecturer = spinnerLecturer.getSelectedItem().toString();
+                    Log.d("hemsss", subject);
 
                     Map<String, Object> params = new HashMap<>();
                     params.put("subject", subject);
+                    Log.d("whywhywhywhy", subject);
                     params.put("day", day);
                     params.put("start", timeStart);
                     params.put("end", timeEnd);
                     params.put("lecturer", lecturer);
-                    mDatabase.child(course.getId()).updateChildren(params).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        //                    mDatabase.child("student").child(student.getUid()).updateChildren(params).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    mCourse.child(course.getId()).updateChildren(params).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             dialog.cancel();
@@ -198,6 +198,11 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                             finish();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(AddCourse.this, "Course Data Failed to Update", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

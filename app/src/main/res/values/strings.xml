@@ -335,4 +335,5 @@
     <string name="courselist">Course List</string>
     <string name="enrollBtn">Enroll</string>
     <string name="removeScheduleBtn">Remove</string>
+    <string name="editAccBtn">Edit</string>
 </resources>
