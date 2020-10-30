@@ -169,7 +169,6 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
             int index = adapterLecturers.getPosition(course.getLecturer());
             spinnerLecturer.setSelection(index);
 
-
             addCourse.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

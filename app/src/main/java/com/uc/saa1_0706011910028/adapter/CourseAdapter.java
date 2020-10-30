@@ -21,9 +21,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.uc.saa1_0706011910028.AddCourse;
 import com.uc.saa1_0706011910028.CourseData;
 import com.uc.saa1_0706011910028.Glovar;
@@ -35,7 +37,9 @@ import java.util.ArrayList;
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewViewHolder>{
 
     private Context context;
-    DatabaseReference dbCourse;
+    private DatabaseReference dbStudent;
+    private DatabaseReference dbStudentCourse;
+    private DatabaseReference dbCourse;
     Dialog dialog;
     int pos = 0;
     private ArrayList<Course> listCourse;
@@ -63,6 +67,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
     @Override
     public void onBindViewHolder(@NonNull final CourseAdapter.CardViewViewHolder holder, int position) {
         final Course course = getListCourse().get(position);
+
         holder.labelname.setText(course.getSubject());
         holder.labellecturer.setText("Lecturer: " + course.getLecturer());
         holder.labelday.setText("Day: " + course.getDay());
@@ -82,43 +87,44 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(context)
-                        .setTitle("Confirmation")
-                        .setMessage("Are you sure to delete "+course.getSubject()+" data?")
-                        .setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(final DialogInterface dialogInterface, int i) {
-                                dialog.show();
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        dialog.cancel();
-                                        dbCourse.child(course.getId()).removeValue(new DatabaseReference.CompletionListener() {
-                                            @Override
-                                            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                                                Intent in = new Intent(context, CourseData.class);
-                                                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                                Toast.makeText(context, "Delete success!", Toast.LENGTH_SHORT).show();
-                                                context.startActivity(in);
-                                                ((Activity)context).finish();
-                                                dialogInterface.cancel();
-
-                                            }
-                                        });
-
-
-                                    }
-                                }, 2000);
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                    .setTitle("Confirmation")
+                    .setMessage("Are you sure to delete "+course.getSubject()+" data?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(final DialogInterface dialogInterface, int i) {
+                            dialog.show();
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
                                 dialog.cancel();
-                            }
-                        })
-                        .create()
-                        .show();
+
+                                deleteCourseStudent(course.getId());
+
+                                dbCourse.child(course.getId()).removeValue(new DatabaseReference.CompletionListener() {
+                                    @Override
+                                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                        Intent in = new Intent(context, CourseData.class);
+                                        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        Toast.makeText(context, "Delete success!", Toast.LENGTH_SHORT).show();
+                                        context.startActivity(in);
+                                        ((Activity)context).finish();
+                                        dialogInterface.cancel();
+                                    }
+                                });
+
+                                }
+                            }, 2000);
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    })
+                    .create()
+                    .show();
 
 
             }
@@ -147,9 +153,27 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
             dialog = Glovar.loadingDialog(context);
             pos = getAdapterPosition();
             courseImg = itemView.findViewById(R.id.courseIconImg);
-
         }
 
+    }
+
+    public void deleteCourseStudent(String course_id){
+        //check if student has the course
+        dbStudent = FirebaseDatabase.getInstance().getReference("student");
+        dbStudent.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
+                    //student yang berbeda-beda
+
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }
