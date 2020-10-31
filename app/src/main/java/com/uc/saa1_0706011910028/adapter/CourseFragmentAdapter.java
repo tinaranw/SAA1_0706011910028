@@ -5,14 +5,16 @@ package com.uc.saa1_0706011910028.adapter;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,7 +35,7 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
     private Context context;
     Dialog dialog;
     private ArrayList<Course> listCourse;
-
+    Course course;
     private DatabaseReference mDatabase;
     FirebaseDatabase dbEnroll;
 
@@ -103,6 +105,7 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
     }
 
     boolean conflict = false;
+    boolean same = false;
 
     public void checkOverlap(final Course pickedCourse){
         final int selectedCourseStartInt = Integer.parseInt(pickedCourse.getStart().replace(":",""));
@@ -112,26 +115,87 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 conflict = false;
+                same = false;
                 for(DataSnapshot childSnapshot : snapshot.getChildren()){
-                    Course course = childSnapshot.getValue(Course.class);
+                    course = childSnapshot.getValue(Course.class);
                     int courseStartInt = Integer.parseInt(course.getStart().replace(":",""));
                     int courseEndInt = Integer.parseInt(course.getEnd().replace(":",""));
 
                     if (pickedCourse.getDay().equalsIgnoreCase(course.getDay())) {
 
-                        if (selectedCourseStartInt >= courseStartInt && selectedCourseStartInt <= courseEndInt) {
+                        if (selectedCourseStartInt > courseStartInt && selectedCourseStartInt < courseEndInt) {
                             conflict = true;
                         }
-                        if (selectedCourseEndInt >= courseStartInt && selectedCourseEndInt <= courseEndInt) {
+                        if (selectedCourseEndInt > courseStartInt && selectedCourseEndInt < courseEndInt) {
                             conflict = true;
                         }
+                    } else if(pickedCourse.getSubject().equalsIgnoreCase(course.getSubject())){
+                            same = true;
                     }
                 }
 
                 if (conflict){
-                    Toast.makeText(context, "Course Conflict!", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "Course Conflict!", Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(context)
+                            .setTitle("Warning")
+                            .setIcon(R.drawable.android)
+                            .setMessage("You cannot take  " + course.getSubject() + ",. Course schedules overlapped!")
+                            .setCancelable(false)
+                            .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(final DialogInterface dialogInterface, int i) {
+                                    dialog.show();
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            dialog.cancel();
+                                        }
+                                    }, 1000);
+                                }
+                            })
+                            .create()
+                            .show();
+                } else if(same){
+                    new AlertDialog.Builder(context)
+                            .setTitle("Warning")
+                            .setIcon(R.drawable.android)
+                            .setMessage("You cannot take  " + course.getSubject() + ", twice!")
+                            .setCancelable(false)
+                            .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(final DialogInterface dialogInterface, int i) {
+                                    dialog.show();
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            dialog.cancel();
+                                        }
+                                    }, 1000);
+                                }
+                            })
+                            .create()
+                            .show();
                 } else {
                     addedCourse.setValue(pickedCourse);
+                    new AlertDialog.Builder(context)
+                            .setTitle("Success")
+                            .setIcon(R.drawable.android)
+                            .setMessage("You successfully added  " + course.getSubject() + ", to your schedule!")
+                            .setCancelable(false)
+                            .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(final DialogInterface dialogInterface, int i) {
+                                    dialog.show();
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            dialog.cancel();
+                                        }
+                                    }, 1000);
+                                }
+                            })
+                            .create()
+                            .show();
                 }
 
             }

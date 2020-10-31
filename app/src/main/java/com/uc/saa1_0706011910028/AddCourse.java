@@ -29,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.uc.saa1_0706011910028.model.Course;
+import com.uc.saa1_0706011910028.model.Student;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,6 +48,8 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
     Dialog dialog;
     private DatabaseReference mDatabase;
     private DatabaseReference mCourse;
+    private DatabaseReference dbStudent;
+    private DatabaseReference dbStudentChild;
     List<String> lecturer_array;
     ArrayAdapter<CharSequence> adapterend;
 
@@ -95,7 +98,6 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
 
         spinnerTimeEnd = findViewById(R.id.courseTimeEndSpinner);
 
-
         spinnerTimeStart.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -120,6 +122,13 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
                 ArrayAdapter<String> adapterLecturers = new ArrayAdapter<>(AddCourse.this, android.R.layout.simple_spinner_item,lecturer_array);
                 adapterLecturers.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerLecturer.setAdapter(adapterLecturers);
+                if(action.equalsIgnoreCase("edit")){
+                    int index = adapterLecturers.getPosition(course.getLecturer());
+                    Log.d("lecturerCourse", course.getLecturer());
+                    Log.d("lecturerCourseIndex", String.valueOf(index));
+                    spinnerLecturer.setSelection(index);
+                }
+
             }
 
             @Override
@@ -166,8 +175,6 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
             int endIndex = adapterend.getPosition(course.getEnd());
             spinnerTimeEnd.setSelection(endIndex);
 
-            int index = adapterLecturers.getPosition(course.getLecturer());
-            spinnerLecturer.setSelection(index);
 
             addCourse.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -204,6 +211,8 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
                             Toast.makeText(AddCourse.this, "Course Data Failed to Update", Toast.LENGTH_SHORT).show();
                         }
                     });
+
+                    updateCourseStudent(course.getId());
                 }
             });
         }
@@ -338,5 +347,55 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
 
         adapterend.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTimeEnd.setAdapter(adapterend);
+    }
+
+
+    public void updateCourseStudent(final String id){
+        Log.d("WHYWHYWHY", id);
+        dbStudent = FirebaseDatabase.getInstance().getReference("student");
+        dbStudent.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (final DataSnapshot studID : dataSnapshot.getChildren()) {
+                    dbStudentChild = dbStudent.child(studID.getValue(Student.class).getUid()).child("course");
+                    dbStudentChild.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot coID : dataSnapshot.getChildren()) {
+
+                                String coursegetid = coID.getValue(Course.class).getId();
+                                if(id.equals(coursegetid)){
+                                    Map<String, Object> params = new HashMap<>();
+                                    params.put("subject", subject);
+                                    params.put("day", day);
+                                    params.put("start", timeStart);
+                                    params.put("end", timeEnd);
+                                    params.put("lecturer", lecturer);
+                                    dbStudentChild.child(coursegetid).updateChildren(params).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

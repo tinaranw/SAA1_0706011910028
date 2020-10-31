@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ import com.uc.saa1_0706011910028.CourseData;
 import com.uc.saa1_0706011910028.Glovar;
 import com.uc.saa1_0706011910028.R;
 import com.uc.saa1_0706011910028.model.Course;
+import com.uc.saa1_0706011910028.model.Student;
 
 import java.util.ArrayList;
 
@@ -38,7 +40,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
 
     private Context context;
     private DatabaseReference dbStudent;
-    private DatabaseReference dbStudentCourse;
+    private DatabaseReference dbStudentChild;
     private DatabaseReference dbCourse;
     Dialog dialog;
     int pos = 0;
@@ -155,16 +157,46 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
 
     }
 
-    public void deleteCourseStudent(String course_id){
+
+
+    public void deleteCourseStudent(final String studentId){
+        Log.d("WHYWHYWHY", studentId);
         //check if student has the course
         dbStudent = FirebaseDatabase.getInstance().getReference("student");
         dbStudent.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                //exid->student
+                //getValue(Student.class).getUid())--> get ID
+                for (final DataSnapshot exId : dataSnapshot.getChildren()) {
+                    //student yang berbeda-beda, for student id
+                    Log.d("BRUHH", "GODDAMNIT");
+                    dbStudentChild = dbStudent.child(exId.getValue(Student.class).getUid()).child("course");
+                    dbStudentChild.addValueEventListener(new ValueEventListener() {
+                        //udah masuk course, nge for id2 dalemnya
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Log.d("CKCKCK", studentId);
+                            for (DataSnapshot jd_id : dataSnapshot.getChildren()) {
+                                Log.d("HAISH", "ZHENDEMA");
+                                Log.d("HELL YEA", studentId);
+                                Log.d("DAHELL YEA", jd_id.getValue(Course.class).getId());
+                                String bruh = jd_id.getValue(Course.class).getId();
+                                if(studentId.equals(bruh)){
+                                    dbStudentChild.child(bruh).removeValue(new DatabaseReference.CompletionListener() {
+                                        @Override
+                                        public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                          Log.d("BRUHH YEA", studentId);
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
-                    //student yang berbeda-beda
-
+                        }
+                    });
                 }
             }
             @Override
