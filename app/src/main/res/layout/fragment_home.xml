@@ -74,8 +74,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/angelwoodbanner"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/studentCalendarView"
                 app:layout_constraintStart_toStartOf="@+id/studentCalendarView"
                 app:layout_constraintTop_toBottomOf="@+id/studentCalendarView" />

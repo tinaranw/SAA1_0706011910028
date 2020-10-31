@@ -30,13 +30,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.uc.saa1_0706011910028.Glovar;
 import com.uc.saa1_0706011910028.R;
 import com.uc.saa1_0706011910028.Starter;
+import com.uc.saa1_0706011910028.StudentRegister;
 import com.uc.saa1_0706011910028.model.Student;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyAccount extends Fragment {
 
-    Button logoutBtn;
+    Button logoutBtn, editBtn;
     TextView labelname, labelnim, labelemail, labelgenderage, labeladdress, labelnim2;
     DatabaseReference dbStudent;
     FirebaseAuth firebaseAuth;
@@ -44,6 +45,7 @@ public class MyAccount extends Fragment {
     ImageView changeProfileImg;
     CircleImageView profileimg;
     Dialog dialog;
+
 
     public MyAccount() {
         // Required empty public constructor
@@ -70,6 +72,8 @@ public class MyAccount extends Fragment {
         profileimg = view.findViewById(R.id.profileStudentAcc);
         changeProfileImg = view.findViewById(R.id.changeProfilePicButton);
         dialog = Glovar.loadingDialog(getActivity());
+        logoutBtn = view.findViewById(R.id.logoutBtn);
+        editBtn = view.findViewById(R.id.editAccBtn);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -98,13 +102,25 @@ public class MyAccount extends Fragment {
             }
         });
 
-        logoutBtn = view.findViewById(R.id.logoutBtn);
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), StudentRegister.class);
+                intent.putExtra("action", "edit_account");
+                intent.putExtra("edit_data_student", student);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+
+
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 new AlertDialog.Builder(getActivity())
-                        .setTitle("Konfirmasi")
+                        .setTitle("Confirmation")
                         .setMessage("Are you sure to logout of "+student.getName()+" ?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {

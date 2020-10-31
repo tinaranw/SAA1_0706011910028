@@ -125,8 +125,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CardViewVi
                     })
                     .create()
                     .show();
-
-
             }
         });
     }

@@ -112,7 +112,7 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
                     addStudent();
                 }
             });
-        } else if (action.equalsIgnoreCase("edit")){
+        } else if (action.equalsIgnoreCase("edit") || action.equalsIgnoreCase("edit_account")){
             getSupportActionBar().setTitle(R.string.editStudent);
             student = intent.getParcelableExtra("edit_data_student");
             input_email.getEditText().setFocusable(false);
@@ -124,12 +124,10 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
             input_age.getEditText().setText(student.getAge());
             input_address.getEditText().setText(student.getAddress());
             if(student.getGender().equalsIgnoreCase("male")){
-//                rg_gender.check(R.id.lecturerMaleRadioButton);
                 input_male.setChecked(true);
                 studentImg.setImageResource(R.drawable.malestudent);
 
             }else{
-//                rg_gender.check(R.id.lecturerFemaleRadioButton);
                 input_female.setChecked(true);
                 studentImg.setImageResource(R.drawable.student);
             }
@@ -163,11 +161,18 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
                         @Override
                         public void onSuccess(Void aVoid) {
                             dialog.cancel();
-                            Intent intent;
-                            intent = new Intent(StudentRegister.this, StudentData.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
-                            finish();
+                            if(action.equalsIgnoreCase("edit")){
+                                Intent intent = new Intent(StudentRegister.this, StudentData.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                                finish();
+                            } else if(action.equalsIgnoreCase("edit_account")){
+                                Intent intent = new Intent(StudentRegister.this, MainActivity.class);
+//                                intent.putExtra("edit_acc_intent", "go_to_acc");
+                                startActivity(intent);
+                                finish();
+                            }
+
                         }
                     });
                 }
@@ -275,7 +280,16 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.student_menu, menu);
-        return true;
+        if(action.equalsIgnoreCase("add")){
+            getMenuInflater().inflate(R.menu.student_menu, menu);
+            return true;
+        } else if(action.equalsIgnoreCase("add")){
+            getMenuInflater().inflate(R.menu.student_menu, menu);
+            return true;
+        } else {
+            getMenuInflater().inflate(R.menu.student_menu, menu);
+            return false;
+        }
+
     }
 }

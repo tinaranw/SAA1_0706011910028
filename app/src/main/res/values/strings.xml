@@ -336,4 +336,6 @@
     <string name="enrollBtn">Enroll</string>
     <string name="removeScheduleBtn">Remove</string>
     <string name="editAccBtn">Edit</string>
+    <string name="updAccBtn">Update</string>
+    <string name="editAccToolbar">Edit Account</string>
 </resources>
