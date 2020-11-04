@@ -1,8 +1,11 @@
 package com.uc.saa1_0706011910028;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -52,6 +55,7 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
     private DatabaseReference dbStudentChild;
     List<String> lecturer_array;
     ArrayAdapter<CharSequence> adapterend;
+    Boolean setLecturer = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +84,47 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
                 finish();
             }
         });
+
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot.hasChild("lecturer")) {
+                    //nothing
+                } else {
+                    new AlertDialog.Builder(AddCourse.this)
+                            .setTitle("Warning")
+                            .setIcon(R.drawable.android)
+                            .setMessage("No lecturers found! Please add a lecturer!")
+                            .setCancelable(false)
+                            .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(final DialogInterface dialogInterface, int i) {
+                                    dialog.show();
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            setLecturer = false;
+                                            Log.d("checkiflecturerexist", String.valueOf(setLecturer));
+                                            Intent intent = new Intent(AddCourse.this, AddLecturer.class);
+                                            intent.putExtra("action","add");
+                                            startActivity(intent);
+                                            dialog.cancel();
+                                            finish();
+                                        }
+                                    }, 1000);
+                                }
+                            })
+                            .create()
+                            .show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
         spinnerDay = findViewById(R.id.courseDaySpinner);
         ArrayAdapter<CharSequence> adapterDays = ArrayAdapter.createFromResource(this, R.array.days, android.R.layout.simple_spinner_item);
@@ -111,22 +156,25 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
             }
         });
 
+
         lecturer_array = new ArrayList<>();
         mDatabase.child("lecturer").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 for (DataSnapshot childSnapshot:snapshot.getChildren()){
+
                     String firebase_lecturer = childSnapshot.child("name").getValue(String.class);
                     lecturer_array.add(firebase_lecturer);
-                }
-                ArrayAdapter<String> adapterLecturers = new ArrayAdapter<>(AddCourse.this, android.R.layout.simple_spinner_item,lecturer_array);
-                adapterLecturers.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerLecturer.setAdapter(adapterLecturers);
-                if(action.equalsIgnoreCase("edit")){
-                    int index = adapterLecturers.getPosition(course.getLecturer());
-                    Log.d("lecturerCourse", course.getLecturer());
-                    Log.d("lecturerCourseIndex", String.valueOf(index));
-                    spinnerLecturer.setSelection(index);
+                    ArrayAdapter<String> adapterLecturers = new ArrayAdapter<>(AddCourse.this, android.R.layout.simple_spinner_item,lecturer_array);
+                    adapterLecturers.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerLecturer.setAdapter(adapterLecturers);
+                    if(action.equalsIgnoreCase("edit")){
+                        int index = adapterLecturers.getPosition(course.getLecturer());
+                        Log.d("lecturerCourse", course.getLecturer());
+                        Log.d("lecturerCourseIndex", String.valueOf(index));
+                        spinnerLecturer.setSelection(index);
+                    }
                 }
 
             }
@@ -255,7 +303,9 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
         day = spinnerDay.getSelectedItem().toString();
         timeStart = spinnerTimeStart.getSelectedItem().toString();
         timeEnd = spinnerTimeEnd.getSelectedItem().toString(); //Yang error
-        lecturer = spinnerLecturer.getSelectedItem().toString();
+         lecturer = spinnerLecturer.getSelectedItem().toString();
+
+
 
         if (!subject.isEmpty()) {
             addCourse.setEnabled(true);
@@ -298,7 +348,7 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
     @Override
     public void onBackPressed() {
         Intent intent;
-        intent = new Intent(AddCourse.this, Starter.class);
+        intent = new Intent(AddCourse.this, CourseData.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
