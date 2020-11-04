@@ -90,9 +90,41 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
 
         Intent intent = getIntent();
         action = intent.getStringExtra("action");
+        //set Toolbar
+        if(action.equalsIgnoreCase("add")) {
+            bar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(StudentRegister.this, Starter.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        } else if (action.equalsIgnoreCase("edit")){
+            bar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(StudentRegister.this, StudentData.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        } else {
+            bar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(StudentRegister.this, MainActivity.class);
+                    intent.putExtra("navigation", "account");
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        }
+
         if(action.equalsIgnoreCase("add")){
             getSupportActionBar().setTitle("Register as Student");
             btn_register.setText("Register");
+
             rg_gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -241,11 +273,27 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
 
     @Override
     public void onBackPressed() {
-        Intent intent;
-        intent = new Intent(StudentRegister.this, StudentData.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
+        if(action.equalsIgnoreCase("add")){
+            Intent intent;
+            intent = new Intent(StudentRegister.this, Starter.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        }
+         else if(action.equalsIgnoreCase("edit")){
+            Intent intent;
+            intent = new Intent(StudentRegister.this, StudentData.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        } else {
+            Intent intent;
+            intent = new Intent(StudentRegister.this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        }
+
     }
 
     public void getFormValue(){

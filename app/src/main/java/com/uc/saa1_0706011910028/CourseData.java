@@ -88,7 +88,7 @@ public class CourseData extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent;
         intent = new Intent(CourseData.this, AddCourse.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("action", "add");
         startActivity(intent);
         finish();
     }

@@ -78,6 +78,14 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
         if(action.equals("add")){
             getSupportActionBar().setTitle(R.string.addlecturer);
             addLecturer.setText(R.string.addlecturer);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(AddLecturer.this, Starter.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
             addLecturer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -88,7 +96,14 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
             });
         }else{
             getSupportActionBar().setTitle(R.string.editlecturer);
-            getSupportActionBar().setTitle(R.string.editlecturer);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(AddLecturer.this, LecturerData.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
             lecturer = intent.getParcelableExtra("edit_data_lect");
             lecturerName.getEditText().setText(lecturer.getName());
             lecturerExpertise.getEditText().setText(lecturer.getExpertise());
@@ -162,6 +177,7 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
             return true;
 //            finish();
         } else if(id == R.id.lecturerList){
+
             Intent intent;
             intent = new Intent(AddLecturer.this, LecturerData.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -198,5 +214,14 @@ public class AddLecturer extends AppCompatActivity implements TextWatcher {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.lecturer_menu, menu);
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent;
+        intent = new Intent(AddLecturer.this, Starter.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 }

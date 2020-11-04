@@ -28,25 +28,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         toolbar = findViewById(R.id.mainToolbar);
-//        toolbar.setTitle("Home");
-//        setSupportActionBar(toolbar);
-//
-//        String path = "nope";
-//        String path2 = getIntent().getStringExtra("edit_acc_intent");
-//
-//        if(path.equalsIgnoreCase("nope")){
-//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//            transaction.replace(R.id.studentFrameMain, new HomeFragment());
-//            transaction.commit();
-//        } else if(path2.equalsIgnoreCase("go_to_acc")){
-//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//            transaction.replace(R.id.studentFrameMain, new MyAccount());
-//            transaction.commit();
-//        } else if(path2.equalsIgnoreCase("go_to_main")){
-//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//            transaction.replace(R.id.studentFrameMain, new HomeFragment());
-//            transaction.commit();
-//        }
 
         bottomNavigationView = findViewById(R.id.studentBottomNavBar);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -105,17 +86,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         bottomNavigationView.setSelectedItemId(R.id.menu_home);
-//        String path = "nope";
-//        String path2 = getIntent().getStringExtra("edit_acc_intent");
-//
-//        if(path.equalsIgnoreCase("nope")){
-//            bottomNavigationView.setSelectedItemId(R.id.menu_home);
-//        } else if(path2.equalsIgnoreCase("go_to_acc")){
-//            bottomNavigationView.setSelectedItemId(R.id.menu_account);
-//        } else if(path2.equalsIgnoreCase("go_to_main")){
-//            bottomNavigationView.setSelectedItemId(R.id.menu_home);
-//        }
-
     }
 
     @Override

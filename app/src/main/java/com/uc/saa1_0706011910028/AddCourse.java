@@ -187,6 +187,27 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
 
         Intent intent = getIntent();
         action = intent.getStringExtra("action");
+
+        //setup toolbar
+        if(action.equalsIgnoreCase("add")) {
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(AddCourse.this, Starter.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        } else if (action.equalsIgnoreCase("edit")){
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(AddCourse.this, CourseData.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        }
         if(action.equalsIgnoreCase("add")){
             getSupportActionBar().setTitle(R.string.addCourseTitle);
             addCourse.setText("Add");
@@ -347,11 +368,19 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
 
     @Override
     public void onBackPressed() {
-        Intent intent;
-        intent = new Intent(AddCourse.this, CourseData.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
+        //setup backpresed
+        if(action.equalsIgnoreCase("add")) {
+            Intent intent = new Intent(AddCourse.this, Starter.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        } else if (action.equalsIgnoreCase("edit")){
+            Intent intent = new Intent(AddCourse.this, CourseData.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        }
+
     }
 
     public void setSpinnerTimeEnd(int position){

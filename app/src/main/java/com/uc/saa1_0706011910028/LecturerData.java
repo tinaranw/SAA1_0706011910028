@@ -100,6 +100,7 @@ public class LecturerData extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent;
         intent = new Intent(LecturerData.this, AddLecturer.class);
+        intent.putExtra("action","add");
         startActivity(intent);
         finish();
     }

@@ -87,7 +87,7 @@ public class StudentData extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent;
         intent = new Intent(StudentData.this, StudentRegister.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("action", "add");
         startActivity(intent);
         finish();
     }
