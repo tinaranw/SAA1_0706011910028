@@ -3,10 +3,12 @@
 package com.uc.saa1_0706011910028.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,9 +36,9 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
     private Context context;
     Dialog dialog;
     private ArrayList<Course> listCourse;
-    Course course;
     private DatabaseReference mDatabase;
     FirebaseDatabase dbEnroll;
+    Course course;
 
     private ArrayList<Course> getListCourse() {
         return listCourse;
@@ -70,7 +71,34 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
         holder.btn_enroll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkOverlap(course);
+                new androidx.appcompat.app.AlertDialog.Builder(context)
+                        .setTitle("Confirmation")
+                        .setIcon(R.drawable.android)
+                        .setMessage("Are you sure to you want to take " + course.getSubject() + " ?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(final DialogInterface dialogInterface, int i) {
+                                dialog.show();
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        dialog.cancel();
+                                        checkOverlap(course);
+
+                                    }
+                                }, 2000);
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .create()
+                        .show();
+
             }
         });
     }
@@ -105,41 +133,68 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
     }
 
     boolean conflict = false;
-    boolean same = false;
 
     public void checkOverlap(final Course pickedCourse){
         final int selectedCourseStartInt = Integer.parseInt(pickedCourse.getStart().replace(":",""));
         final int selectedCourseEndInt = Integer.parseInt(pickedCourse.getEnd().replace(":",""));
-
+        final String chosencourseday = pickedCourse.getDay();
         FirebaseDatabase.getInstance().getReference("student").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("course").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 conflict = false;
-                same = false;
                 for(DataSnapshot childSnapshot : snapshot.getChildren()){
+
                     course = childSnapshot.getValue(Course.class);
+                    String courseday = course.getDay();
                     int courseStartInt = Integer.parseInt(course.getStart().replace(":",""));
+                    Log.d("hem", String.valueOf(courseStartInt));
+
                     int courseEndInt = Integer.parseInt(course.getEnd().replace(":",""));
+                    Log.d("hem", String.valueOf(courseEndInt));
+                    if (chosencourseday.equalsIgnoreCase(courseday)) {
 
-                    if (pickedCourse.getDay().equalsIgnoreCase(course.getDay())) {
-
-                        if (selectedCourseStartInt > courseStartInt && selectedCourseStartInt < courseEndInt) {
+                        if (selectedCourseStartInt >= courseStartInt && selectedCourseStartInt < courseEndInt) {
                             conflict = true;
+                            break;
                         }
-                        if (selectedCourseEndInt > courseStartInt && selectedCourseEndInt < courseEndInt) {
+                        if (selectedCourseEndInt > courseStartInt && selectedCourseEndInt <= courseEndInt) {
                             conflict = true;
+                            break;
                         }
-                    } else if(pickedCourse.getSubject().equalsIgnoreCase(course.getSubject())){
-                            same = true;
                     }
                 }
+                Log.d("conflict", String.valueOf(conflict));
+//                if (conflict) {
+//                    new AlertDialog.Builder(context)
+//                            .setTitle("Warning")
+//                            .setIcon(R.drawable.android)
+//                            .setMessage("You cannot take this course! Schedules might overlap!")
+//                            .setCancelable(false)
+//                            .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(final DialogInterface dialogInterface, int i) {
+//                                    dialog.show();
+//                                    new Handler().postDelayed(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            dialog.cancel();
+//
+//                                        }
+//                                    }, 1000);
+//                                }
+//                            })
+//                            .create()
+//                            .show();
+//                } else {
+//                    addedCourse.setValue(pickedCourse);
+//                }
 
                 if (conflict){
 //                    Toast.makeText(context, "Course Conflict!", Toast.LENGTH_SHORT).show();
                     new AlertDialog.Builder(context)
                             .setTitle("Warning")
                             .setIcon(R.drawable.android)
-                            .setMessage("You cannot take  " + course.getSubject() + ",. Course schedules overlapped!")
+                            .setMessage("You cannot take this course. Course schedules overlapped!")
                             .setCancelable(false)
                             .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
                                 @Override
@@ -155,32 +210,12 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
                             })
                             .create()
                             .show();
-                } else if(same){
-                    new AlertDialog.Builder(context)
-                            .setTitle("Warning")
-                            .setIcon(R.drawable.android)
-                            .setMessage("You cannot take  " + course.getSubject() + ", twice!")
-                            .setCancelable(false)
-                            .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(final DialogInterface dialogInterface, int i) {
-                                    dialog.show();
-                                    new Handler().postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            dialog.cancel();
-                                        }
-                                    }, 1000);
-                                }
-                            })
-                            .create()
-                            .show();
-                } else {
+                }  else {
                     addedCourse.setValue(pickedCourse);
                     new AlertDialog.Builder(context)
                             .setTitle("Success")
                             .setIcon(R.drawable.android)
-                            .setMessage("You successfully added  " + course.getSubject() + ", to your schedule!")
+                            .setMessage("You successfully added this course to your schedule!")
                             .setCancelable(false)
                             .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
                                 @Override

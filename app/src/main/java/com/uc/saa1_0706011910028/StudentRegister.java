@@ -44,7 +44,7 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
     RadioButton radioButton;
     RadioButton input_male, input_female;
     Button btn_register;
-    String uid="", email="", pass="", name="", nim="", age="", gender="male",address="", action="";
+    String uid="", email="", pass="", name="", nim="", age="", gender="",address="", action="";
     Student student;
     ImageView studentImg;
     private DatabaseReference mDatabase;
@@ -123,14 +123,15 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
             input_nim.getEditText().setText(student.getNim());
             input_age.getEditText().setText(student.getAge());
             input_address.getEditText().setText(student.getAddress());
-            if(student.getGender().equalsIgnoreCase("male")){
-                input_male.setChecked(true);
+            gender = student.getGender();
+            if(gender.equalsIgnoreCase("Male")){
                 studentImg.setImageResource(R.drawable.malestudent);
-
-            }else{
-                input_female.setChecked(true);
+                rg_gender.check(R.id.studentMaleRadioButton);
+            } else if(gender.equalsIgnoreCase("Female")){
                 studentImg.setImageResource(R.drawable.student);
+                rg_gender.check(R.id.studentFemaleRadioButton);
             }
+
             rg_gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -241,7 +242,7 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
     @Override
     public void onBackPressed() {
         Intent intent;
-        intent = new Intent(StudentRegister.this, Starter.class);
+        intent = new Intent(StudentRegister.this, StudentData.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
