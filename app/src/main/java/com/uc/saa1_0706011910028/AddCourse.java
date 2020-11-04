@@ -166,15 +166,15 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
 
                     String firebase_lecturer = childSnapshot.child("name").getValue(String.class);
                     lecturer_array.add(firebase_lecturer);
-                    ArrayAdapter<String> adapterLecturers = new ArrayAdapter<>(AddCourse.this, android.R.layout.simple_spinner_item,lecturer_array);
-                    adapterLecturers.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerLecturer.setAdapter(adapterLecturers);
-                    if(action.equalsIgnoreCase("edit")){
-                        int index = adapterLecturers.getPosition(course.getLecturer());
-                        Log.d("lecturerCourse", course.getLecturer());
-                        Log.d("lecturerCourseIndex", String.valueOf(index));
-                        spinnerLecturer.setSelection(index);
-                    }
+                }
+                ArrayAdapter<String> adapterLecturers = new ArrayAdapter<>(AddCourse.this, android.R.layout.simple_spinner_item,lecturer_array);
+                adapterLecturers.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerLecturer.setAdapter(adapterLecturers);
+                if(action.equalsIgnoreCase("edit")){
+                    int index = adapterLecturers.getPosition(course.getLecturer());
+                    Log.d("lecturerCourse", course.getLecturer());
+                    Log.d("lecturerCourseIndex", String.valueOf(index));
+                    spinnerLecturer.setSelection(index);
                 }
 
             }
@@ -325,8 +325,6 @@ public class AddCourse extends AppCompatActivity implements TextWatcher{
         timeStart = spinnerTimeStart.getSelectedItem().toString();
         timeEnd = spinnerTimeEnd.getSelectedItem().toString(); //Yang error
          lecturer = spinnerLecturer.getSelectedItem().toString();
-
-
 
         if (!subject.isEmpty()) {
             addCourse.setEnabled(true);

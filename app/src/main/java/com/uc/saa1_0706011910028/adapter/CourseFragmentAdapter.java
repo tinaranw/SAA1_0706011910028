@@ -164,33 +164,8 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
                     }
                 }
                 Log.d("conflict", String.valueOf(conflict));
-//                if (conflict) {
-//                    new AlertDialog.Builder(context)
-//                            .setTitle("Warning")
-//                            .setIcon(R.drawable.android)
-//                            .setMessage("You cannot take this course! Schedules might overlap!")
-//                            .setCancelable(false)
-//                            .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(final DialogInterface dialogInterface, int i) {
-//                                    dialog.show();
-//                                    new Handler().postDelayed(new Runnable() {
-//                                        @Override
-//                                        public void run() {
-//                                            dialog.cancel();
-//
-//                                        }
-//                                    }, 1000);
-//                                }
-//                            })
-//                            .create()
-//                            .show();
-//                } else {
-//                    addedCourse.setValue(pickedCourse);
-//                }
 
                 if (conflict){
-//                    Toast.makeText(context, "Course Conflict!", Toast.LENGTH_SHORT).show();
                     new AlertDialog.Builder(context)
                             .setTitle("Warning")
                             .setIcon(R.drawable.android)
@@ -211,7 +186,6 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
                             .create()
                             .show();
                 }  else {
-                    addedCourse.setValue(pickedCourse);
                     new AlertDialog.Builder(context)
                             .setTitle("Success")
                             .setIcon(R.drawable.android)
@@ -225,6 +199,7 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
                                         @Override
                                         public void run() {
                                             dialog.cancel();
+                                            addedCourse.setValue(pickedCourse);
                                         }
                                     }, 1000);
                                 }

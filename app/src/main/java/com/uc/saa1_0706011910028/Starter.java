@@ -38,7 +38,6 @@ public class Starter extends AppCompatActivity {
         if(fAuth.getCurrentUser() != null){
             Intent intent = new Intent(Starter.this, MainActivity.class);
             startActivity(intent);
-//            intent.putExtra("edit_acc_intent", "go_to_main");
             finish();
         }
 
