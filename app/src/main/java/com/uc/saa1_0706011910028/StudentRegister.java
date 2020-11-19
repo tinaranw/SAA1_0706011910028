@@ -24,8 +24,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -222,7 +220,7 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
                 if(task.isSuccessful()){
                     dialog.cancel();
                     uid = mAuth.getCurrentUser().getUid();
-                    Student student = new Student(uid, email, pass, name, nim, gender,age, address);
+                    Student student = new Student(uid, email, pass, name, nim, gender,age, address, "-");
                     mDatabase.child(uid).setValue(student).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -237,11 +235,7 @@ public class StudentRegister extends AppCompatActivity implements TextWatcher {
                 } else {
                     try {
                         throw task.getException();
-                    }catch(FirebaseAuthInvalidCredentialsException malFormed){
-                        Toast.makeText(StudentRegister.this, "Invalid email or password!", Toast.LENGTH_SHORT).show();
-                    }catch(FirebaseAuthUserCollisionException malFormed){
-                        Toast.makeText(StudentRegister.this, "Email already registered!", Toast.LENGTH_SHORT).show();
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         Toast.makeText(StudentRegister.this, "Register failed!", Toast.LENGTH_SHORT).show();
                     }
                     dialog.cancel();

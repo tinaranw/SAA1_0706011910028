@@ -338,4 +338,5 @@
     <string name="editAccBtn">Edit</string>
     <string name="updAccBtn">Update</string>
     <string name="editAccToolbar">Edit Account</string>
+    <string name="fcm_key">AAAAiDIUYMA:APA91bHwkUplB74z4OXFchbQQgcAmLDvX-E1NeASJVVdvAdHQE_1TCoHqZI6teFC42HnZNJrWYw5m-QFmVrx_HSoc9VG-XM1odctaaXp7TlI_MTMd__QNStglvCEo7Ry0EG7XOYE4-EI</string>
 </resources>

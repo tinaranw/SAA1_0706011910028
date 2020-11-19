@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.uc.saa1_0706011910028.Glovar;
+import com.uc.saa1_0706011910028.MyNotificationManager;
 import com.uc.saa1_0706011910028.R;
 import com.uc.saa1_0706011910028.model.Course;
 
@@ -39,6 +40,7 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
     private DatabaseReference mDatabase;
     FirebaseDatabase dbEnroll;
     Course course;
+    MyNotificationManager myNotificationManager;
 
     private ArrayList<Course> getListCourse() {
         return listCourse;
@@ -200,6 +202,7 @@ public class CourseFragmentAdapter extends RecyclerView.Adapter<CourseFragmentAd
                                         public void run() {
                                             dialog.cancel();
                                             addedCourse.setValue(pickedCourse);
+                                            new MyNotificationManager(context).pushNotification(pickedCourse.getSubject());
                                         }
                                     }, 1000);
                                 }

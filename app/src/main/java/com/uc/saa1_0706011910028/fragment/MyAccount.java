@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,11 +41,14 @@ public class MyAccount extends Fragment {
     Button logoutBtn, editBtn;
     TextView labelname, labelnim, labelemail, labelgenderage, labeladdress, labelnim2;
     DatabaseReference dbStudent;
+    DatabaseReference dbStudent2;
     FirebaseAuth firebaseAuth;
     Student student;
     ImageView changeProfileImg;
     CircleImageView profileimg;
     Dialog dialog;
+    SharedPreferences userPref;
+    SharedPreferences.Editor userEditor;
 
 
     public MyAccount() {
@@ -78,6 +82,9 @@ public class MyAccount extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
 
         dbStudent = FirebaseDatabase.getInstance().getReference("student").child(firebaseAuth.getCurrentUser().getUid());
+        dbStudent2 = FirebaseDatabase.getInstance().getReference("student");
+        userPref = getActivity().getSharedPreferences("user", getActivity().MODE_PRIVATE);
+        userEditor = userPref.edit();
 
         dbStudent.addValueEventListener(new ValueEventListener() {
             @Override
@@ -132,6 +139,9 @@ public class MyAccount extends Fragment {
                                     public void run() {
                                         dialog.cancel();
                                         FirebaseAuth.getInstance().signOut();
+                                        dbStudent2.child(firebaseAuth.getCurrentUser().getUid()).child("token").setValue("-");
+                                        userEditor.putString("utoken", "-");
+                                        userEditor.commit();
                                         Toast.makeText(getActivity(), "Logged out successfully!", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(getActivity(), Starter.class);
                                         startActivity(intent);

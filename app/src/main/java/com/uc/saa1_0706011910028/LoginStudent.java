@@ -2,6 +2,7 @@ package com.uc.saa1_0706011910028;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,6 +21,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class LoginStudent extends AppCompatActivity implements TextWatcher {
 
@@ -29,6 +33,9 @@ public class LoginStudent extends AppCompatActivity implements TextWatcher {
     Toolbar toolbar;
     FirebaseAuth fAuth;
     Dialog dialog;
+    DatabaseReference dbUsers;
+    SharedPreferences userPref;
+    SharedPreferences.Editor userEditor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +46,9 @@ public class LoginStudent extends AppCompatActivity implements TextWatcher {
         fAuth = FirebaseAuth.getInstance();
 
         dialog = Glovar.loadingDialog(LoginStudent.this);
+        dbUsers = FirebaseDatabase.getInstance().getReference("student");
+        userPref = getSharedPreferences("user", MODE_PRIVATE);
+        userEditor = userPref.edit();
 
         studentEmail.getEditText().addTextChangedListener(this);
         studentPassword.getEditText().addTextChangedListener(this);
@@ -57,9 +67,19 @@ public class LoginStudent extends AppCompatActivity implements TextWatcher {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(LoginStudent.this, "Logged in successfully!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginStudent.this, MainActivity.class);
-                        startActivity(intent);
+                        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+                            @Override
+                            public void onComplete(@NonNull Task<String> task2) {
+                                String utoken= task2.getResult();
+                                dbUsers.child(fAuth.getCurrentUser().getUid()).child("token").setValue(utoken);
+                                userEditor.putString("utoken", utoken);
+                                userEditor.commit();
+                                Toast.makeText(LoginStudent.this, "Logged in successfully!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginStudent.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+
                     } else {
                         Toast.makeText(LoginStudent.this, "Failed to log in!", Toast.LENGTH_SHORT).show();
                 }
